@@ -7,10 +7,10 @@
 
 // Google Form Configuration
 const GOOGLE_FORM_CONFIG = {
-  url: 'https://docs.google.com/forms/d/e/1FAIpQLSfQBuZRQ5Of80jWBZcsvrdnbsPi-S8hT9gVRN-uBfYJC3z1kg/formResponse',
+  url: 'https://docs.google.com/forms/d/e/1FAIpQLSd7Rn_UfGTsGdTNvLpMAZMH_cNqPFaQtnHOmadRP0h7KYlnyA/formResponse',
   fields: {
-    name: 'entry.1278087128',
-    email: 'entry.2114541071',
+    name: 'entry.1776671031',
+    email: 'entry.556623961',
     location: 'entry.1967362245',
     browser: 'entry.1189216641',
     device: 'entry.1020871504'
