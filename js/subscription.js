@@ -11,9 +11,9 @@ const GOOGLE_FORM_CONFIG = {
   fields: {
     name: 'entry.1776671031',
     email: 'entry.556623961',
-    location: 'entry.1967362245',
-    browser: 'entry.1189216641',
-    device: 'entry.1020871504'
+    location: 'entry.1358020764',
+    browser: 'entry.1026458690',
+    device: 'entry.709745366'
   }
 };
 
