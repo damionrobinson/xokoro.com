@@ -1,0 +1,231 @@
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap');
+
+// Font face declarations for NyghtSerif font family
+
+// Light weight (300)
+@font-face {
+  font-family: 'NyghtSerif';
+  src: url('../assets/font/NyghtSerif-Light.woff2') format('woff2'),
+  url('../assets/font/NyghtSerif-Light.woff') format('woff');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'NyghtSerif';
+  src: url('../assets/font/NyghtSerif-LightItalic.woff2') format('woff2'),
+  url('../assets/font/NyghtSerif-LightItalic.woff') format('woff');
+  font-weight: 300;
+  font-style: italic;
+  font-display: swap;
+}
+
+// Regular weight (400)
+@font-face {
+  font-family: 'NyghtSerif';
+  src: url('../assets/font/NyghtSerif-Regular.woff2') format('woff2'),
+  url('../assets/font/NyghtSerif-Regular.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'NyghtSerif';
+  src: url('../assets/font/NyghtSerif-RegularItalic.woff2') format('woff2'),
+  url('../assets/font/NyghtSerif-RegularItalic.woff') format('woff');
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+
+// Medium weight (500)
+@font-face {
+  font-family: 'NyghtSerif';
+  src: url('../assets/font/NyghtSerif-Medium.woff2') format('woff2'),
+  url('../assets/font/NyghtSerif-Medium.woff') format('woff');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'NyghtSerif';
+  src: url('../assets/font/NyghtSerif-MediumItalic.woff2') format('woff2'),
+  url('../assets/font/NyghtSerif-MediumItalic.woff') format('woff');
+  font-weight: 500;
+  font-style: italic;
+  font-display: swap;
+}
+
+// Bold weight (700)
+@font-face {
+  font-family: 'NyghtSerif';
+  src: url('../assets/font/NyghtSerif-Bold.woff2') format('woff2'),
+  url('../assets/font/NyghtSerif-Bold.woff') format('woff');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'NyghtSerif';
+  src: url('../assets/font/NyghtSerif-BoldItalic.woff2') format('woff2'),
+  url('../assets/font/NyghtSerif-BoldItalic.woff') format('woff');
+  font-weight: 700;
+  font-style: italic;
+  font-display: swap;
+}
+
+// Dark weight (900) - treating as extra bold
+@font-face {
+  font-family: 'NyghtSerif';
+  src: url('../assets/font/NyghtSerif-Dark.woff2') format('woff2'),
+  url('../assets/font/NyghtSerif-Dark.woff') format('woff');
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'NyghtSerif';
+  src: url('../assets/font/NyghtSerif-DarkItalic.woff2') format('woff2'),
+  url('../assets/font/NyghtSerif-DarkItalic.woff') format('woff');
+  font-weight: 900;
+  font-style: italic;
+  font-display: swap;
+}
+
+// Font utility classes
+.font-nyght {
+  font-family: 'NyghtSerif', serif;
+}
+
+// Weight utility classes
+.font-light {
+  font-weight: 300;
+}
+
+.font-regular {
+  font-weight: 400;
+}
+
+.font-medium {
+  font-weight: 500;
+}
+
+.font-bold {
+  font-weight: 700;
+}
+
+.font-dark {
+  font-weight: 900;
+}
+
+// Style utility classes
+.font-italic {
+  font-style: italic;
+}
+
+// Mixins for easy use
+@mixin nyght-serif($weight: 400, $style: normal) {
+  font-family: 'NyghtSerif', sans-serif;
+  font-weight: $weight;
+  font-style: $style;
+}
+
+// Example usage mixins
+@mixin nyght-light {
+  @include nyght-serif(300);
+}
+
+@mixin nyght-light-italic {
+  @include nyght-serif(300, italic);
+}
+
+@mixin nyght-regular {
+  @include nyght-serif(400);
+}
+
+@mixin nyght-medium {
+  @include nyght-serif(500);
+}
+
+@mixin nyght-bold {
+  @include nyght-serif(700);
+}
+
+@mixin nyght-dark {
+  @include nyght-serif(900);
+}
+
+
+
+// Headings with different weights
+h1 {
+  @include nyght-dark();
+  font-size: 2.5rem;
+  line-height: 1.2;
+}
+
+h2 {
+  @include nyght-bold();
+  font-size: 2rem;
+}
+
+h3 {
+  @include nyght-medium();
+  font-size: 1.75rem;
+}
+
+h4 {
+  @include nyght-regular();
+  font-size: 1.5rem;
+}
+
+/*// Paragraph variations
+p {
+  @include nyght-regular();
+
+  &.lead {
+    @include nyght-light();
+    font-size: 1.25rem;
+  }
+
+  &.emphasis {
+    @include nyght-medium();
+  }
+}*/
+
+// Quotes and citations
+blockquote {
+  @include nyght-serif(300, italic); // Light italic
+  font-size: 1.125rem;
+
+  cite {
+    @include nyght-medium();
+    font-size: 0.875rem;
+  }
+}
+
+// Using utility classes example
+.hero-title {
+  @extend .font-nyght;
+  @extend .font-dark;
+  font-size: 3rem;
+}
+
+// Direct usage example
+.custom-text {
+  font-family: 'NyghtSerif', serif;
+  font-weight: 500;
+  font-style: normal;
+}
+
+// Responsive font weight example
+@media (min-width: 768px) {
+  h1 {
+    font-weight: 900; // Use Dark weight on larger screens
+  }
+}

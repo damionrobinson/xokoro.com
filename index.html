@@ -4,70 +4,97 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Join Beta - Xokoro</title>
-    
+
     <!-- Bootstrap CSS CDN -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-    
+    <!--    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">-->
+
     <!-- Custom SCSS (compile to CSS first) -->
     <link href="scss/xokoro.css" rel="stylesheet">
 </head>
 <body>
-    <div class="subscription-container">
-        <div class="subscription-header">
-            <h1>Join the Beta</h1>
-            <p>Be the first to experience our platform</p>
+<div class="content">
+
+
+    <div class="info-form d-flex flex-column align-items-center">
+        <div class="info-group">
+            <h1 class="title">xokoro</h1>
+            <h3 class="subtitle">expressive ~ handmade ~ limited</h3>
+            <p class="lead">
+                Jewellery shaped by hands, created through exploration of materials and making.
+                <br> Each piece is made in small runs, guided by curiosity rather than trends.
+                <br>
+                <br>
+                Join the mailing list to receive first access to new collections, studio releases and upcoming
+                market dates.
+            </p>
         </div>
-        
+
         <!-- Form Section -->
         <div id="formSection">
-            <form id="subscriptionForm">
-                <div class="mb-3">
-                    <input 
-                        type="text" 
-                        class="form-control" 
-                        id="fullName" 
-                        name="fullName" 
-                        placeholder="Full Name" 
+            <form id="subscriptionForm" class="form-elements">
+                <input
+                        type="text"
+                        class="form-control name-control"
+                        id="fullName"
+                        name="fullName"
+                        placeholder="Full Name"
                         required
                         aria-label="Full name">
+
+                <div class=" email-control">
+                    <input
+                            type="email"
+                            class="form-control"
+                            id="email"
+                            name="email"
+                            placeholder="Email Address"
+                            required
+                            aria-label="Email address">
+                    <button type="submit" class="btn btn-primary" id="submitBtn">
+                        <span id="btnText" class="me-3">Sign-up</span>
+                        <svg width="31" height="22" viewBox="0 0 31 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M29.6375 10.483H0.5V10.9249H29.6375V10.483Z" fill="#5F0E38" stroke="#5F0E38"/>
+                            <path d="M19.9474 20.707L19.6344 20.3941L29.3244 10.704L19.6344 1.02001L19.9474 0.707031L29.9504 10.704L19.9474 20.707Z" fill="#5F0E38" stroke="#5F0E38"/>
+                        </svg>
+
+                        <span id="btnSpinner" class="spinner-border spinner-border-sm d-none" role="status"
+                              aria-hidden="true"></span>
+                    </button>
                 </div>
-                
-                <div class="mb-3">
-                    <input 
-                        type="email" 
-                        class="form-control" 
-                        id="email" 
-                        name="email" 
-                        placeholder="Email Address" 
-                        required
-                        aria-label="Email address">
-                </div>
-                
+
+
                 <!-- Hidden fields for derived data -->
                 <input type="hidden" id="location" name="location" value="Unknown">
                 <input type="hidden" id="browser" name="browser" value="">
                 <input type="hidden" id="device" name="device" value="">
-                
-                <button type="submit" class="btn btn-primary" id="submitBtn">
-                    <span id="btnText">Request Access</span>
-                    <span id="btnSpinner" class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>
-                </button>
-                
-                <p class="hint">Launching in a few weeks, be the first to access it.</p>
+
+
             </form>
-        </div>
-        
-        <!-- Success Message Section -->
-        <div id="successSection" class="success-message">
-            <h2>✓ You're In!</h2>
-            <p>Thanks for joining the beta. We'll send you an email when we launch.</p>
         </div>
     </div>
 
-    <!-- Bootstrap Bundle JS CDN -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
-    
-    <!-- Custom JS -->
-    <script src="js/subscription.js"></script>
+    <div class="banner">
+        <h6> Earrings & Hygiene</h6>
+        <p>
+            Each pair of earrings is prepared with care and intended for immediate wear. For hygiene reasons, earrings
+            are final sale and cannot be returned or exchanged, whether purchased online or in person. We encourage you
+            to review materials and details before buying, and to take your time when viewing pieces at markets or
+            pop-ups. If an item arrives faulty, we will of course resolve this in line with your statutory rights.
+        </p>
+    </div>
+
+    <!-- Success Message Section -->
+    <div id="successSection" class="success-message">
+        <h2>✓ You're in!</h2>
+    </div>
+</div>
+
+<!-- Bootstrap Bundle JS CDN -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+        crossorigin="anonymous"></script>
+
+<!-- Custom JS -->
+<script src="js/subscription.js"></script>
 </body>
 </html>
