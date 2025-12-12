@@ -20,16 +20,21 @@ $white: #fff;
 }
 
 // Body styles
+html, body {
+  height: 100%;
+  width: 100%;
+  min-width: 320px;
+}
+
 body {
   font-family: "Manrope", sans-serif;
   background: $primary;
-  min-height: 100vh;
-  padding: 20px;
 
   .content {
     display: flex;
-    justify-content: center;
-    margin-top: 2.5rem;
+    flex-direction: column;
+    height: 100%;
+    justify-content: space-between;
   }
 }
 
@@ -39,7 +44,11 @@ body {
 }
 
 .info-form {
+  margin: auto;
   max-width: 700px;
+  @media screen and (max-width: 700px) {
+    padding: 2rem;
+  }
 }
 
 // Form controls
@@ -64,7 +73,7 @@ body {
   }
 
   .name-control {
-    max-width: 15rem;
+    max-width: 21.4rem;
   }
 
   .email-control {
@@ -111,7 +120,10 @@ button#submitBtn {
 
 // Success message
 .success-message {
- h2{ font-family: "Manrope", sans-serif;}
+  h2 {
+    font-family: "Manrope", sans-serif;
+  }
+
   position: absolute;
   top: 0;
   display: none;
@@ -142,6 +154,7 @@ button#submitBtn {
 }
 
 
+/* Info Group*/
 /* Info Group*/
 .info-group {
   text-align: center;
@@ -186,11 +199,17 @@ button#submitBtn {
 .banner {
   font-family: "Manrope", sans-serif;
   background-color: $secondary;
-  p,h6{
-    color:$primary
+
+  p, h6 {
+    color: $primary
   }
-  position: absolute;
+
   bottom: 0;
   width: 100%;
   padding: 3rem;
+
+  @media screen and (min-width: 1000px) {
+    //position: absolute;
+
+  }
 }
