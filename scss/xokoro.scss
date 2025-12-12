@@ -22,8 +22,7 @@ $white: #fff;
 // Body styles
 html, body {
   height: 100%;
-  width: 100%;
-  min-width: 320px;
+  width: 100%
 }
 
 body {
@@ -65,7 +64,6 @@ body {
     width: 20rem;
     padding: 0.8125rem 0.75rem 0.8125rem 1rem;
     @include transition(border-color 0.2s);
-
     &:focus {
       //border-color: $primary-gradient-start;
       box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.25);
@@ -73,7 +71,11 @@ body {
   }
 
   .name-control {
+    max-width: 15rem;
+    @media screen and (max-width: 700px) {
     max-width: 21.4rem;
+
+    }
   }
 
   .email-control {

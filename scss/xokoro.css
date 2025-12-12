@@ -12031,7 +12031,6 @@ textarea.form-control-lg {
 html, body {
   height: 100%;
   width: 100%;
-  min-width: 320px;
 }
 
 body {
@@ -12075,7 +12074,12 @@ body .content {
   box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.25);
 }
 #formSection .name-control {
-  max-width: 21.4rem;
+  max-width: 15rem;
+}
+@media screen and (max-width: 700px) {
+  #formSection .name-control {
+    max-width: 21.4rem;
+  }
 }
 #formSection .email-control {
   display: flex;
