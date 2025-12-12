@@ -12109,8 +12109,6 @@ button#submitBtn {
 }
 
 .success-message {
-  position: absolute;
-  top: 0;
   display: none;
   text-align: center;
   padding: 20px;
