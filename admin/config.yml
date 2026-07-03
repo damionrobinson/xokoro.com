@@ -1,6 +1,11 @@
 backend:
   name: git-gateway
   branch: main
+  # This site is on GitHub Pages, not Netlify, so Decap needs to be told
+  # explicitly which Netlify site is running Identity + Git Gateway for it.
+  # (The widget's own APIUrl in admin/index.html only applies on localhost.)
+  identity_url: "https://rainbow-kringle-12483a.netlify.app/.netlify/identity"
+  gateway_url: "https://rainbow-kringle-12483a.netlify.app/.netlify/git"
 
 # Where uploaded product photos are stored in the repo, and the URL
 # path the live site uses to reach them.
