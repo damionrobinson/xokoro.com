@@ -1,37 +1,72 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Accept invite — Xokoro CMS</title>
-  <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Set your password — Xokoro CMS</title>
+<!--
+  This page deliberately avoids the Netlify Identity widget, which has two
+  problems for a GitHub-Pages-hosted site: it needs the invite link's hash
+  to be in an exact format the widget doesn't always get from Netlify's own
+  emails, and Decap's own bootstrap code can silently reset any custom API
+  URL we give it. Instead this talks to GoTrue (the library behind Netlify
+  Identity) directly, with the Netlify site URL hardcoded below, so there's
+  nothing to race or mis-parse.
+-->
+<script src="https://unpkg.com/gotrue-js@1.0.1/browser/gotrue.js"></script>
+<style>
+  body{font-family:-apple-system,Segoe UI,Roboto,sans-serif;max-width:420px;margin:80px auto;padding:0 20px;color:#141414;}
+  input{display:block;width:100%;padding:10px;margin:8px 0 20px;box-sizing:border-box;font-size:16px;border:1px solid #ccc;}
+  button{padding:10px 20px;font-size:16px;cursor:pointer;}
+  .msg{margin-top:18px;line-height:1.5;}
+  .err{color:#b00020;}
+  .ok{color:#0a7a4a;}
+</style>
 </head>
 <body>
-  <!--
-    One-off helper page, used only to accept a Netlify Identity invite
-    (or reset a password) and is kept separate from admin/index.html on
-    purpose. This page is only ever opened on the *.netlify.app domain
-    (via the invite email link), where the widget's default same-origin
-    behaviour works correctly with no custom APIUrl needed. admin/index.html
-    deliberately does NOT load this widget, to avoid a bug where it resets
-    the identity API URL back to this site's own origin.
+  <h2>Set your password</h2>
+  <p id="status">Checking your invite link…</p>
+  <form id="form" style="display:none;">
+    <label>New password (min. 8 characters)
+      <input type="password" id="password" required minlength="8">
+    </label>
+    <button type="submit">Set password &amp; finish</button>
+  </form>
+  <div id="msg" class="msg"></div>
 
-    Usage: open the link from your invite/recovery email, but change the
-    path from "/#invite_token=..." to "/admin/invite.html#invite_token=..."
-    (keep everything after the # exactly as it was).
-  -->
-  <p style="font-family:sans-serif;">Loading the sign-in dialog…</p>
   <script>
-    if (window.netlifyIdentity) {
-      window.netlifyIdentity.init();
-      window.netlifyIdentity.on('init', function () {
-        // If the widget didn't already auto-open from the token in the
-        // URL hash, open it manually so there's always something to click.
-        setTimeout(function () {
-          if (!document.querySelector('.netlify-identity-modal, .nf-modal')) {
-            window.netlifyIdentity.open();
-          }
-        }, 800);
+    var NETLIFY_SITE_URL = "https://rainbow-kringle-12483a.netlify.app";
+    var auth = new GoTrue({ APIUrl: NETLIFY_SITE_URL + "/.netlify/identity" });
+
+    var inviteMatch = location.hash.match(/invite_token=([^&]+)/);
+    var recoveryMatch = location.hash.match(/recovery_token=([^&]+)/);
+    var statusEl = document.getElementById('status');
+    var form = document.getElementById('form');
+    var msgEl = document.getElementById('msg');
+
+    if (!inviteMatch && !recoveryMatch) {
+      statusEl.textContent = "No invite or recovery token found in this page's link. Go to the Netlify dashboard, Identity, and either resend an invite or use \"Send recovery email\" for your user, then open that email's link here (keep everything after the # exactly as it is, just after /admin/invite.html).";
+    } else {
+      var token = decodeURIComponent((inviteMatch || recoveryMatch)[1]);
+      var isRecovery = !!recoveryMatch;
+      statusEl.textContent = "Link found. Choose a password to finish setting up your account.";
+      form.style.display = 'block';
+
+      form.addEventListener('submit', function (e) {
+        e.preventDefault();
+        var password = document.getElementById('password').value;
+        var action = isRecovery
+          ? auth.recover(token, true).then(function (user) { return user.update({ password: password }); })
+          : auth.acceptInvite(token, password, true);
+
+        action.then(function () {
+          form.style.display = 'none';
+          msgEl.className = 'msg ok';
+          msgEl.textContent = "Done — your password is set. Close this tab and log in at xokoro.com/admin/ with your email and this password.";
+        }).catch(function (err) {
+          msgEl.className = 'msg err';
+          msgEl.textContent = "Something went wrong: " + (err && err.message ? err.message : err) + ". If this says the token is invalid or expired, go back to Netlify Identity and send yourself a fresh invite or recovery email.";
+        });
       });
     }
   </script>
