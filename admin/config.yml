@@ -1,0 +1,93 @@
+backend:
+  name: git-gateway
+  branch: main
+
+# Where uploaded product photos are stored in the repo, and the URL
+# path the live site uses to reach them.
+media_folder: "assets/img/uploads"
+public_folder: "/assets/img/uploads"
+
+publish_mode: simple
+
+collections:
+  - name: "products"
+    label: "Products"
+    files:
+      - name: "catalog"
+        label: "Product Catalogue"
+        file: "content/products.json"
+        description: "Add, edit, reorder or remove the pieces shown in the shop feed. Order here (top to bottom) sets 'Newest' sort order on the site."
+        fields:
+          - label: "Products"
+            name: "products"
+            widget: "list"
+            summary: "{{fields.title}} — £{{fields.price}} ({{fields.tag}})"
+            fields:
+              - label: "Product ID (URL slug)"
+                name: "id"
+                widget: "string"
+                hint: "Lowercase, letters/numbers/hyphens only, e.g. meridian-drop-earrings. Must be unique — this becomes the piece's shareable link."
+                pattern: ["^[a-z0-9]+(-[a-z0-9]+)*$", "Use lowercase letters, numbers and hyphens only"]
+
+              - label: "Title"
+                name: "title"
+                widget: "string"
+
+              - label: "Type"
+                name: "category"
+                widget: "string"
+                hint: "e.g. Necklace, Earrings, Ring, Bracelet, Pendant"
+
+              - label: "Price (£)"
+                name: "price"
+                widget: "number"
+                value_type: "int"
+                min: 0
+
+              - label: "Colour"
+                name: "colour"
+                widget: "string"
+                hint: "Used as a shop filter — keep naming consistent across pieces, e.g. Amber, Coral, Cobalt, Plum."
+
+              - label: "Material"
+                name: "material"
+                widget: "string"
+                hint: "Used as a shop filter, e.g. Sterling Silver, Brass, Enamel, Glass."
+
+              - label: "Availability"
+                name: "tag"
+                widget: "select"
+                options: ["Ready to ship", "Made to order"]
+                default: "Ready to ship"
+
+              - label: "Description"
+                name: "description"
+                widget: "text"
+
+              - label: "Materials list"
+                name: "materials"
+                widget: "list"
+                label_singular: "Line"
+                hint: "Shown as the bulleted 'Materials' list on the product page."
+                default: []
+
+              - label: "Photos"
+                name: "images"
+                widget: "list"
+                field: { label: "Image", name: "image", widget: "image" }
+                hint: "The first photo is used as the shop feed thumbnail."
+
+              - label: "Colourway variants"
+                name: "variants"
+                widget: "list"
+                required: false
+                default: []
+                summary: "{{fields.name}}"
+                hint: "Optional. Add one entry per colourway if this piece comes in more than one colour."
+                fields:
+                  - { label: "Colourway name", name: "name", widget: "string" }
+                  - { label: "Swatch colour", name: "swatch", widget: "color" }
+                  - label: "Photos for this colourway"
+                    name: "images"
+                    widget: "list"
+                    field: { label: "Image", name: "image", widget: "image" }

@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About — Xokoro</title>
+<meta name="description" content="The hand behind Xokoro — a studio of one, and how to get in touch.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="assets/css/xokoro.css" rel="stylesheet">
+</head>
+<body class="no-hero" data-root=".">
+
+<nav class="xok-nav">
+  <div class="container">
+    <a href="index.html" class="xok-nav-logo unset-btn">XOKORO</a>
+    <div class="xok-nav-links">
+      <a href="index.html" class="xok-nav-link unset-btn" data-page="index.html">Shop</a>
+      <a href="info.html" class="xok-nav-link unset-btn" data-page="info.html">Info</a>
+      <a href="about.html" class="xok-nav-link unset-btn" data-page="about.html">About</a>
+    </div>
+  </div>
+</nav>
+
+<div class="xok-about">
+  <div class="xok-about-body">
+    <div class="xok-about-copy">
+      <div class="xok-kicker">About</div>
+      <h1>The hand behind Xokoro</h1>
+      <p>I'm a maker working alone from a small studio. I came to jewellery sideways, through colour — the dyed enamels, glass, and stones I couldn't stop collecting — and stayed for the discipline of paring each piece back until only the essential form remains.</p>
+      <p>Everything is made in short runs or as one-offs. I post new work almost daily, so the feed is less a catalogue than a record of what I'm thinking about that week. If a piece speaks to you, it may not be there tomorrow.</p>
+      <p>For commissions, gifts, or anything you're curious about, write to me below. I read every message myself.</p>
+    </div>
+
+    <div class="xok-contact-card">
+      <div class="xok-contact-label">Say hello</div>
+      <form class="xok-contact-form" id="xok-contact-form">
+        <div style="display:flex;flex-direction:column;gap:9px;">
+          <span style="font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink);opacity:.7;">I'm getting in touch about</span>
+          <div class="xok-contact-types">
+            <button type="button" class="xok-type-btn is-selected" data-type="general">A general enquiry</button>
+            <button type="button" class="xok-type-btn" data-type="made-to-order">A made-to-order piece</button>
+          </div>
+        </div>
+        <label class="xok-field-label">Name
+          <input type="text" name="cName" placeholder="Your name" required>
+        </label>
+        <label class="xok-field-label">Email
+          <input type="email" name="cEmail" placeholder="you@email.com" required>
+        </label>
+        <label class="xok-field-label">Message
+          <textarea name="cMsg" rows="4" placeholder="Tell me what you're after" required></textarea>
+        </label>
+        <div class="xok-form-error" id="xok-contact-error" style="display:none;">Please add your name, a valid email, and a message.</div>
+        <button type="submit" class="btn btn-dark" style="margin-top:4px;">Send message</button>
+      </form>
+      <div class="xok-form-success" id="xok-contact-success" style="display:none;">
+        Thank you — your message is on its way. I read every one myself.
+        <small>This form isn't wired to a mailbox yet — ask me to connect it (Formspree, a Google Form, or your email provider all work) once you're ready to receive real enquiries.</small>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer class="xok-footer">
+  <div class="container">
+    <a href="index.html" class="xok-footer-logo unset-btn">XOKORO</a>
+    <div class="xok-footer-links">
+      <a href="info.html" class="xok-footer-link unset-btn">Info</a>
+      <a href="about.html" class="xok-footer-link unset-btn">About</a>
+      <button class="xok-footer-join" data-sub-open>Join the list</button>
+      <a href="https://instagram.com" target="_blank" rel="noopener" class="xok-social">Instagram</a>
+      <a href="https://tiktok.com" target="_blank" rel="noopener" class="xok-social">TikTok</a>
+    </div>
+    <div class="xok-copyright">© <span data-year></span> Xokoro — made by hand</div>
+  </div>
+</footer>
+
+<div class="xok-modal-overlay xok-sub-overlay">
+  <div class="xok-sub-modal">
+    <div class="xok-sub-banner"></div>
+    <div class="xok-sub-body">
+      <div class="xok-modal-kicker">The studio list</div>
+      <h3>First look, before the feed</h3>
+      <p>I post new work almost daily. Join the list and I'll send the pieces I'm most excited about before they go live.</p>
+      <form class="xok-sub-form">
+        <input type="text" name="sName" placeholder="Your name" required>
+        <input type="email" name="sEmail" placeholder="you@email.com" required>
+        <div class="xok-form-error" style="display:none;"></div>
+        <button type="submit" class="btn btn-accent">Join the list</button>
+        <div class="xok-sub-fineprint">No spam; unsubscribe any time.</div>
+      </form>
+      <div class="xok-form-success" style="display:none;">You're on the list — thank you.</div>
+    </div>
+    <button class="xok-modal-close" data-sub-close aria-label="Close">✕</button>
+  </div>
+</div>
+<div class="xok-toast"></div>
+
+<script src="assets/js/site.js" defer></script>
+<script>
+  (function () {
+    var form = document.getElementById('xok-contact-form');
+    var errorEl = document.getElementById('xok-contact-error');
+    var successEl = document.getElementById('xok-contact-success');
+    var typeBtns = document.querySelectorAll('.xok-type-btn');
+    typeBtns.forEach(function (b) {
+      b.addEventListener('click', function () {
+        typeBtns.forEach(function (o) { o.classList.remove('is-selected'); });
+        b.classList.add('is-selected');
+      });
+    });
+    var wantedType = new URLSearchParams(location.search).get('type');
+    if (wantedType) {
+      typeBtns.forEach(function (b) {
+        b.classList.toggle('is-selected', b.getAttribute('data-type') === wantedType);
+      });
+    }
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var name = form.cName.value.trim();
+      var email = form.cEmail.value.trim();
+      var msg = form.cMsg.value.trim();
+      if (!name || email.indexOf('@') === -1 || !msg) {
+        errorEl.style.display = 'block';
+        return;
+      }
+      errorEl.style.display = 'none';
+      form.style.display = 'none';
+      successEl.style.display = 'block';
+    });
+  })();
+</script>
+</body>
+</html>

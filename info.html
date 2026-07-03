@@ -3,14 +3,14 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Xokoro — Handmade jewellery, studio of one</title>
-<meta name="description" content="Colour, held in structure. Handmade jewellery in small runs and one-offs, from a studio of one.">
+<title>Info — Xokoro</title>
+<meta name="description" content="Shipping, returns and privacy — the practical parts of ordering from Xokoro.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link href="assets/css/xokoro.css" rel="stylesheet">
 </head>
-<body class="has-hero" data-root=".">
+<body class="no-hero" data-root=".">
 
 <nav class="xok-nav">
   <div class="container">
@@ -23,51 +23,30 @@
   </div>
 </nav>
 
-<section class="xok-hero">
-  <div class="xok-hero-inner">
-    <div class="xok-eyebrow">Handmade jewellery — studio of one</div>
-    <h1>Colour, held in structure.</h1>
-    <div class="xok-hero-actions">
-      <a href="#xok-feed" class="btn btn-light" data-scroll-to-feed>Enter the feed ↓</a>
-      <a href="about.html?type=made-to-order" class="btn btn-outline-light">Request a custom piece</a>
-    </div>
-  </div>
-</section>
+<div class="xok-info">
+  <div class="xok-kicker">Info</div>
+  <h1>The practical parts</h1>
 
-<section class="xok-feed container" id="xok-feed">
-  <div class="xok-feed-head">
-    <div>
-      <div class="xok-kicker">The Feed</div>
-      <h2>Everything in the studio, right now</h2>
-    </div>
-    <div class="xok-result-count" id="xok-result-count"></div>
+  <div class="xok-info-section">
+    <h2>Shipping</h2>
+    <p>I dispatch ready-to-ship pieces within 2–3 working days, wrapped by hand and sent tracked. Made-to-order and reserved pieces take longer — the timeframe is noted on the piece, and I'll always confirm by email before starting. UK and international shipping available; duties on international orders are the buyer's responsibility.</p>
   </div>
 
-  <div class="xok-filters">
-    <div class="xok-select-wrap">
-      <select class="xok-select" id="xok-filter-colour" aria-label="Filter by colour"></select>
-    </div>
-    <div class="xok-select-wrap">
-      <select class="xok-select" id="xok-filter-category" aria-label="Filter by type"></select>
-    </div>
-    <div class="xok-select-wrap">
-      <select class="xok-select" id="xok-filter-material" aria-label="Filter by material"></select>
-    </div>
-    <div class="xok-filters-spacer"></div>
-    <span class="xok-sort-label">Sort</span>
-    <div class="xok-select-wrap">
-      <select class="xok-select" id="xok-sort" aria-label="Sort">
-        <option value="newest">Newest</option>
-        <option value="price-asc">Price, low to high</option>
-        <option value="price-desc">Price, high to low</option>
-      </select>
-    </div>
+  <div class="xok-info-section">
+    <h2>Returns</h2>
+    <p>Because most pieces are one-off or small-batch, I ask that you choose carefully. Unworn, undamaged pieces can be returned within 14 days of delivery for a refund, minus the original postage — just message me first. Made-to-order and personalised commissions are non-returnable unless they arrive faulty. If something is wrong, tell me and I'll make it right.</p>
   </div>
 
-  <div class="xok-grid" id="xok-grid"></div>
-  <div class="xok-empty" id="xok-empty" style="display:none;">Nothing matches those filters yet. <button id="xok-reset">Clear them.</button></div>
-  <div class="xok-pagination" id="xok-pagination"></div>
-</section>
+  <div class="xok-info-section">
+    <h2>Earrings &amp; hygiene</h2>
+    <p>Each pair of earrings is prepared with care and intended for immediate wear. For hygiene reasons, earrings are final sale and cannot be returned or exchanged, whether purchased online or in person. I encourage you to review materials and details before buying, and to take your time when viewing pieces at markets or pop-ups. If an item arrives faulty, this will of course be resolved in line with your statutory rights.</p>
+  </div>
+
+  <div class="xok-info-section">
+    <h2>Privacy</h2>
+    <p>I only collect what I need to fulfil your order and reply to your messages: your name, email, and shipping address. Payments are handled entirely by PayPal — I never see or store your card details. I don't sell or share your information, and I won't add you to any mailing list unless you ask. Write to me any time to have your details removed.</p>
+  </div>
+</div>
 
 <footer class="xok-footer">
   <div class="container">
@@ -105,6 +84,5 @@
 <div class="xok-toast"></div>
 
 <script src="assets/js/site.js" defer></script>
-<script src="assets/js/products.js" defer></script>
 </body>
 </html>

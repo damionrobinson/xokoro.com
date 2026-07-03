@@ -3,14 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Xokoro — Handmade jewellery, studio of one</title>
-<meta name="description" content="Colour, held in structure. Handmade jewellery in small runs and one-offs, from a studio of one.">
+<title>Xokoro — Product</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link href="assets/css/xokoro.css" rel="stylesheet">
 </head>
-<body class="has-hero" data-root=".">
+<body class="no-hero" data-root=".">
 
 <nav class="xok-nav">
   <div class="container">
@@ -23,51 +22,45 @@
   </div>
 </nav>
 
-<section class="xok-hero">
-  <div class="xok-hero-inner">
-    <div class="xok-eyebrow">Handmade jewellery — studio of one</div>
-    <h1>Colour, held in structure.</h1>
-    <div class="xok-hero-actions">
-      <a href="#xok-feed" class="btn btn-light" data-scroll-to-feed>Enter the feed ↓</a>
-      <a href="about.html?type=made-to-order" class="btn btn-outline-light">Request a custom piece</a>
-    </div>
-  </div>
-</section>
-
-<section class="xok-feed container" id="xok-feed">
-  <div class="xok-feed-head">
-    <div>
-      <div class="xok-kicker">The Feed</div>
-      <h2>Everything in the studio, right now</h2>
-    </div>
-    <div class="xok-result-count" id="xok-result-count"></div>
+<div class="xok-product" id="xok-product-root">
+  <div class="xok-product-top">
+    <a href="index.html" class="xok-back">← Back to the feed</a>
+    <button class="xok-share-link" id="xok-share-btn"><span>↗</span> Share</button>
   </div>
 
-  <div class="xok-filters">
-    <div class="xok-select-wrap">
-      <select class="xok-select" id="xok-filter-colour" aria-label="Filter by colour"></select>
+  <div class="xok-product-body">
+    <div class="xok-product-media">
+      <div class="xok-product-img" id="xok-product-img">
+        <button class="xok-img-nav prev" id="xok-img-prev" aria-label="Previous image">←</button>
+        <button class="xok-img-nav next" id="xok-img-next" aria-label="Next image">→</button>
+        <span class="xok-product-no" id="xok-product-no"></span>
+      </div>
+      <div class="xok-thumbs" id="xok-thumbs"></div>
     </div>
-    <div class="xok-select-wrap">
-      <select class="xok-select" id="xok-filter-category" aria-label="Filter by type"></select>
-    </div>
-    <div class="xok-select-wrap">
-      <select class="xok-select" id="xok-filter-material" aria-label="Filter by material"></select>
-    </div>
-    <div class="xok-filters-spacer"></div>
-    <span class="xok-sort-label">Sort</span>
-    <div class="xok-select-wrap">
-      <select class="xok-select" id="xok-sort" aria-label="Sort">
-        <option value="newest">Newest</option>
-        <option value="price-asc">Price, low to high</option>
-        <option value="price-desc">Price, high to low</option>
-      </select>
+
+    <div class="xok-product-info">
+      <span class="xok-tag" id="xok-product-tag" style="position:static;display:inline-block;"></span>
+      <h1 id="xok-product-title"></h1>
+      <div class="xok-product-price" id="xok-product-price"></div>
+      <p class="xok-product-desc" id="xok-product-desc"></p>
+
+      <div class="xok-variants" id="xok-variants" style="display:none;">
+        <div class="xok-variants-label">Colourway</div>
+        <div class="xok-variant-chips" id="xok-variant-chips"></div>
+      </div>
+
+      <div class="xok-cta-group">
+        <button class="btn btn-accent" id="xok-buy-self">Claim This Piece</button>
+        <button class="btn btn-outline-dark" id="xok-buy-gift">Gift the Unexpected</button>
+      </div>
+
+      <div class="xok-materials">
+        <div class="xok-materials-label">Materials</div>
+        <ul id="xok-materials-list"></ul>
+      </div>
     </div>
   </div>
-
-  <div class="xok-grid" id="xok-grid"></div>
-  <div class="xok-empty" id="xok-empty" style="display:none;">Nothing matches those filters yet. <button id="xok-reset">Clear them.</button></div>
-  <div class="xok-pagination" id="xok-pagination"></div>
-</section>
+</div>
 
 <footer class="xok-footer">
   <div class="container">
@@ -82,6 +75,18 @@
     <div class="xok-copyright">© <span data-year></span> Xokoro — made by hand</div>
   </div>
 </footer>
+
+<!-- Checkout stub -->
+<div class="xok-modal-overlay xok-checkout-overlay">
+  <div class="xok-modal">
+    <div class="xok-modal-kicker">For yourself</div>
+    <h3></h3>
+    <div class="xok-modal-price"></div>
+    <div class="xok-paypal-stub">Pay with PayPal</div>
+    <p class="xok-modal-note">Demo stub. Drop in the live PayPal Business Client ID and the SDK buttons render here — no backend required.</p>
+    <button class="xok-modal-close" data-checkout-close aria-label="Close">✕</button>
+  </div>
+</div>
 
 <div class="xok-modal-overlay xok-sub-overlay">
   <div class="xok-sub-modal">

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Content Manager — Xokoro</title>
+  <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+</head>
+<body>
+  <!--
+    This site is hosted on GitHub Pages, so Netlify Identity is used purely
+    as a free login service (Git Gateway does the actual commit to GitHub).
+    Because this page is NOT served from Netlify, the widget needs to be
+    told explicitly which Netlify site owns the identity/git-gateway service.
+
+    Replace YOUR-NETLIFY-SITE-NAME below with the subdomain of the Netlify
+    site you create per the setup instructions (e.g. if your site is
+    https://xokoro-cms.netlify.app, use "xokoro-cms").
+  -->
+  <script>
+    if (window.netlifyIdentity) {
+      window.netlifyIdentity.init({
+        APIUrl: "https://YOUR-NETLIFY-SITE-NAME.netlify.app/.netlify/identity"
+      });
+      window.netlifyIdentity.on("init", function (user) {
+        if (!user) {
+          window.netlifyIdentity.on("login", function () {
+            document.location.href = "/admin/";
+          });
+        }
+      });
+    }
+  </script>
+  <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
+</body>
+</html>
