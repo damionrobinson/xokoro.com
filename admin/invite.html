@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Accept invite — Xokoro CMS</title>
+  <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+</head>
+<body>
+  <!--
+    One-off helper page, used only to accept a Netlify Identity invite
+    (or reset a password) and is kept separate from admin/index.html on
+    purpose. This page is only ever opened on the *.netlify.app domain
+    (via the invite email link), where the widget's default same-origin
+    behaviour works correctly with no custom APIUrl needed. admin/index.html
+    deliberately does NOT load this widget, to avoid a bug where it resets
+    the identity API URL back to this site's own origin.
+
+    Usage: open the link from your invite/recovery email, but change the
+    path from "/#invite_token=..." to "/admin/invite.html#invite_token=..."
+    (keep everything after the # exactly as it was).
+  -->
+  <p style="font-family:sans-serif;">Loading the sign-in dialog…</p>
+  <script>
+    if (window.netlifyIdentity) {
+      window.netlifyIdentity.init();
+      window.netlifyIdentity.on('init', function () {
+        // If the widget didn't already auto-open from the token in the
+        // URL hash, open it manually so there's always something to click.
+        setTimeout(function () {
+          if (!document.querySelector('.netlify-identity-modal, .nf-modal')) {
+            window.netlifyIdentity.open();
+          }
+        }, 800);
+      });
+    }
+  </script>
+</body>
+</html>
