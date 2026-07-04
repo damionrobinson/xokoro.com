@@ -1,240 +1,25 @@
 {
   "products": [
     {
-      "id": "nightjar-necklace",
-      "title": "Nightjar",
-      "category": "Necklace",
-      "price": 156,
-      "colour": "Onyx",
       "material": "Freshwater Pearl",
-      "tag": "Ready to ship",
-      "description": "Nightjar began with one strand of freshwater pearl and a question about how far onyx could carry a form this quiet. Finished entirely by hand in the studio.",
+      "price": 156,
       "materials": [
         "Freshwater pearl, hand-strung",
         "Accented with a single tumbled river stone",
         "Assembled on an oxidised chain"
       ],
+      "colour": "Onyx",
+      "variants": [],
+      "title": "Nightjar",
       "images": [
         "/assets/img/products/nightjar-necklace-1.svg",
         "/assets/img/products/nightjar-necklace-2.svg",
         "/assets/img/products/nightjar-necklace-3.svg"
       ],
-      "variants": []
-    },
-    {
-      "id": "tidewrack-necklace",
-      "title": "Tidewrack",
-      "category": "Necklace",
-      "price": 142,
-      "colour": "Cobalt",
-      "material": "Sterling Silver",
-      "tag": "Made to order",
-      "description": "I kept Tidewrack deliberately spare so the sterling silver and its cobalt note could do the talking. Worn, it catches light in a way flat photographs never quite hold.",
-      "materials": [
-        "Sterling silver, hand-finished",
-        "Accented with hand-set glass",
-        "Assembled with recycled silver findings"
-      ],
-      "images": [
-        "/assets/img/products/tidewrack-necklace-1.svg",
-        "/assets/img/products/tidewrack-necklace-2.svg",
-        "/assets/img/products/tidewrack-necklace-3.svg"
-      ],
-      "variants": []
-    },
-    {
-      "id": "meridian-drop-earrings",
-      "title": "Meridian Drop Earrings",
-      "category": "Earrings",
-      "price": 86,
-      "colour": "Amber",
-      "material": "Brass",
       "tag": "Ready to ship",
-      "description": "Meridian began with one piece of brass and a question about how far amber could carry a form this quiet. A study in restraint, finished entirely by hand.",
-      "materials": [
-        "Brass, hand-finished",
-        "Accented with a single freshwater pearl",
-        "Assembled on waxed cotton cord"
-      ],
-      "images": [
-        "/assets/img/products/meridian-drop-earrings-1.svg",
-        "/assets/img/products/meridian-drop-earrings-2.svg"
-      ],
-      "variants": [
-        {
-          "name": "Amber",
-          "swatch": "#E8A21C",
-          "images": [
-            "/assets/img/products/meridian-drop-earrings-1.svg",
-            "/assets/img/products/meridian-drop-earrings-2.svg"
-          ]
-        },
-        {
-          "name": "Coral",
-          "swatch": "#E5603E",
-          "images": [
-            "/assets/img/products/meridian-drop-earrings-coral-1.svg",
-            "/assets/img/products/meridian-drop-earrings-coral-2.svg"
-          ]
-        }
-      ]
-    },
-    {
-      "id": "verdigris-hoops",
-      "title": "Verdigris Hoops",
-      "category": "Earrings",
-      "price": 92,
-      "colour": "Turquoise",
-      "material": "Glass",
-      "tag": "Ready to ship",
-      "description": "A study in restraint, structured glass, one turquoise note, nothing else. Verdigris is finished entirely by hand in the studio.",
-      "materials": [
-        "Glass, hand-finished",
-        "Accented with vitreous enamel",
-        "Assembled with hand-formed brass hooks"
-      ],
-      "images": [
-        "/assets/img/products/verdigris-hoops-1.svg",
-        "/assets/img/products/verdigris-hoops-2.svg"
-      ],
-      "variants": [
-        {
-          "name": "Turquoise",
-          "swatch": "#12A6A6",
-          "images": [
-            "/assets/img/products/verdigris-hoops-1.svg",
-            "/assets/img/products/verdigris-hoops-2.svg"
-          ]
-        },
-        {
-          "name": "Plum",
-          "swatch": "#5F0E38",
-          "images": [
-            "/assets/img/products/verdigris-hoops-plum-1.svg",
-            "/assets/img/products/verdigris-hoops-plum-2.svg"
-          ]
-        }
-      ]
-    },
-    {
-      "id": "aster-studs",
-      "title": "Aster Studs",
-      "category": "Earrings",
-      "price": 64,
-      "colour": "Rose",
-      "material": "Gemstone",
-      "tag": "Ready to ship",
-      "description": "Aster began with one piece of gemstone and a question about how far rose could carry a form this quiet. Small enough for every day, considered enough to notice.",
-      "materials": [
-        "Gemstone, hand-set",
-        "Accented with a tumbled river stone",
-        "Assembled with hand-formed brass hooks"
-      ],
-      "images": [
-        "/assets/img/products/aster-studs-1.svg",
-        "/assets/img/products/aster-studs-2.svg"
-      ],
-      "variants": []
-    },
-    {
-      "id": "ember-study-ring",
-      "title": "Ember Study",
-      "category": "Ring",
-      "price": 68,
-      "colour": "Coral",
-      "material": "Enamel",
-      "tag": "Ready to ship",
-      "description": "I kept Ember Study deliberately spare so the enamel and its coral note could do the talking. Worn, it catches light in a way flat photographs never quite hold.",
-      "materials": [
-        "Vitreous enamel, hand-finished",
-        "Set over a brass base",
-        "Sized and finished to order"
-      ],
-      "images": [
-        "/assets/img/products/ember-study-ring-1.svg",
-        "/assets/img/products/ember-study-ring-2.svg"
-      ],
-      "variants": []
-    },
-    {
-      "id": "lodestar-ring",
-      "title": "Lodestar",
-      "category": "Ring",
-      "price": 98,
-      "colour": "Plum",
-      "material": "Sterling Silver",
-      "tag": "Made to order",
-      "description": "A study in restraint, structured sterling silver, one plum note, nothing else. Lodestar is finished entirely by hand in the studio, made to order to your size.",
-      "materials": [
-        "Sterling silver, hand-finished",
-        "Accented with hand-set glass",
-        "Sized and finished to order"
-      ],
-      "images": [
-        "/assets/img/products/lodestar-ring-1.svg",
-        "/assets/img/products/lodestar-ring-2.svg"
-      ],
-      "variants": []
-    },
-    {
-      "id": "kiln-no7-pendant",
-      "title": "Kiln No.7",
-      "category": "Pendant",
-      "price": 74,
-      "colour": "Jade",
-      "material": "Ceramic",
-      "tag": "Ready to ship",
-      "description": "Kiln No.7 began with one piece of ceramic and a question about how far jade could carry a form this quiet. Fired, glazed and strung entirely by hand.",
-      "materials": [
-        "Ceramic, hand-thrown and glazed",
-        "Accented with carved bone detail",
-        "Assembled on knotted silk"
-      ],
-      "images": [
-        "/assets/img/products/kiln-no7-pendant-1.svg",
-        "/assets/img/products/kiln-no7-pendant-2.svg"
-      ],
-      "variants": []
-    },
-    {
-      "id": "saltflat-cuff",
-      "title": "Saltflat",
-      "category": "Bracelet",
-      "price": 118,
-      "colour": "Ivory",
-      "material": "Carved Wood",
-      "tag": "Made to order",
-      "description": "Saltflat began with one piece of carved wood and a question about how far ivory could carry a form this quiet. Made to order, fitted to the wrist.",
-      "materials": [
-        "Carved wood, hand-finished",
-        "Accented with a tumbled river stone",
-        "Assembled with recycled silver findings"
-      ],
-      "images": [
-        "/assets/img/products/saltflat-cuff-1.svg",
-        "/assets/img/products/saltflat-cuff-2.svg"
-      ],
-      "variants": []
-    },
-    {
-      "id": "coppice-bracelet",
-      "title": "Coppice",
-      "category": "Bracelet",
-      "price": 110,
-      "colour": "Ochre",
-      "material": "Brass",
-      "tag": "Ready to ship",
-      "description": "I kept Coppice deliberately spare so the brass and its ochre note could do the talking. Worn, it catches light in a way flat photographs never quite hold.",
-      "materials": [
-        "Brass, hand-finished",
-        "Accented with glass seed beads",
-        "Assembled on an oxidised chain"
-      ],
-      "images": [
-        "/assets/img/products/coppice-bracelet-1.svg",
-        "/assets/img/products/coppice-bracelet-2.svg"
-      ],
-      "variants": []
+      "id": "nightjar-necklace",
+      "description": "Nightjar began with one strand of freshwater pearl and a question about how far onyx could carry a form this quiet. Finished entirely by hand in the studio.",
+      "category": "Necklace"
     }
   ]
 }
