@@ -11,7 +11,7 @@
 (function () {
   'use strict';
 
-  // Deploy google-apps-script/apps-script.gs as a web app and paste its
+  // Deploying google-apps-script/apps-script.gs as a web app and paste its
   // /exec URL here (Deploy > New deployment > Web app > Execute as "Me",
   // access "Anyone").
   var SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxRP5vUbiFXHPE1frplx1Gz9hqvytw4zRZU4n_kIVFRWdwFbcPfvJ0pnlP6dxj9ACiJRQ/exec';
