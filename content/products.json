@@ -32,18 +32,18 @@
       "colour": "Blue",
       "variants": [
         {
-          "name": "Pink",
-          "swatch": "#80064a",
-          "images": [
-            "/assets/img/uploads/aster-studs-1.svg"
-          ]
-        },
-        {
           "name": "Blue",
           "swatch": "#004494",
           "images": [
             "/assets/img/uploads/screenshot-2026-07-04-at-17.25.32.png",
             "/assets/img/uploads/screenshot-2026-07-04-at-17.29.17.png"
+          ]
+        },
+        {
+          "name": "Pink",
+          "swatch": "#80064a",
+          "images": [
+            "/assets/img/uploads/aster-studs-1.svg"
           ]
         }
       ],
