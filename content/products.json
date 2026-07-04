@@ -20,42 +20,6 @@
       "id": "nightjar-necklace",
       "description": "Nightjar began with one strand of freshwater pearl and a question about how far onyx could carry a form this quiet. Finished entirely by hand in the studio.",
       "category": "Necklace"
-    },
-    {
-      "material": "Textile",
-      "price": 166,
-      "materials": [
-        "String",
-        "Silver",
-        "Beads"
-      ],
-      "colour": "Blue",
-      "variants": [
-        {
-          "name": "Blue",
-          "swatch": "#004494",
-          "images": [
-            "/assets/img/uploads/screenshot-2026-07-04-at-17.25.32.png",
-            "/assets/img/uploads/screenshot-2026-07-04-at-17.29.17.png"
-          ]
-        },
-        {
-          "name": "Pink",
-          "swatch": "#80064a",
-          "images": [
-            "/assets/img/uploads/aster-studs-1.svg"
-          ]
-        }
-      ],
-      "title": "Blue Velvet, Kilimangaro Earrings",
-      "images": [
-        "/assets/img/uploads/screenshot-2026-07-04-at-17.25.32.png",
-        "/assets/img/uploads/screenshot-2026-07-04-at-17.29.17.png"
-      ],
-      "tag": "Ready to ship",
-      "id": "blue-velvet-kilimangaro-earrings",
-      "description": "Ayala Bar earrings - Fall/Winter 2020-21 Classic Collection Width: 0.75″ / 1.91 cm | Length: 2.4″ / 6.1 cm",
-      "category": "Earrings"
     }
   ]
 }
