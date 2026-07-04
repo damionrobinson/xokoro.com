@@ -1,6 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<!-- Consent defaults — must run before the GTM container loads, so Google's
+     own tags start in a denied state until the visitor accepts the banner. -->
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('consent', 'default', {
+  'ad_storage': 'denied',
+  'analytics_storage': 'denied',
+  'ad_user_data': 'denied',
+  'ad_personalization': 'denied',
+  'wait_for_update': 500
+});
+(function () {
+  try {
+    if (localStorage.getItem('xokoro_consent') === 'granted') {
+      gtag('consent', 'update', {
+        'ad_storage': 'granted',
+        'analytics_storage': 'granted',
+        'ad_user_data': 'granted',
+        'ad_personalization': 'granted'
+      });
+    }
+  } catch (e) {}
+})();
+</script>
 <!-- Google Tag Manager -->
 <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
 new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
@@ -81,6 +106,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <div class="xok-footer-links">
       <a href="info.html" class="xok-footer-link unset-btn">Info</a>
       <a href="about.html" class="xok-footer-link unset-btn">About</a>
+      <button class="xok-footer-link unset-btn" data-cookie-settings>Cookie settings</button>
       <button class="xok-footer-join" data-sub-open>Join the list</button>
       <a href="https://instagram.com" target="_blank" rel="noopener" class="xok-social">Instagram</a>
       <a href="https://tiktok.com" target="_blank" rel="noopener" class="xok-social">TikTok</a>

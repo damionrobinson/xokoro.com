@@ -377,6 +377,23 @@ body.no-hero .xok-nav{
 }
 .xok-copyright{font-family:var(--mono);font-size:11px;letter-spacing:.06em;color:var(--ink);opacity:.45;}
 
+/* ---------------------------- Cookie banner ---------------------------- */
+.xok-cookie-banner{
+  position:fixed;left:0;right:0;bottom:0;z-index:200;
+  background:var(--ink);color:var(--paper);
+  display:flex;flex-wrap:wrap;gap:18px;align-items:center;justify-content:space-between;
+  padding:20px 28px;
+  transform:translateY(110%);transition:transform .35s ease;
+}
+.xok-cookie-banner.is-open{transform:translateY(0);}
+.xok-cookie-copy{
+  font-family:var(--serif);font-size:14px;line-height:1.6;color:var(--paper);opacity:.9;max-width:640px;
+}
+.xok-cookie-copy a{color:var(--paper);text-decoration:underline;text-underline-offset:3px;opacity:1;}
+.xok-cookie-actions{display:flex;gap:12px;flex-shrink:0;}
+.xok-cookie-actions .btn{padding:10px 20px;font-size:13px;}
+.xok-cookie-actions .btn-outline-dark{color:var(--paper);border-color:rgba(250,250,248,.5);}
+
 /* ---------------------------- Modals ---------------------------- */
 .xok-modal-overlay{
   position:fixed;inset:0;z-index:100;background:rgba(20,20,20,.55);

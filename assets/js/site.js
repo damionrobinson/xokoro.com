@@ -239,6 +239,75 @@
     } catch (e) {}
   }
 
+  /* ---------------- Cookie consent ---------------- */
+  // Google Consent Mode v2. The <head> of every page sets a "denied" default
+  // before GTM loads (see the inline script above the GTM snippet); this just
+  // handles the banner UI and flips the signal to "granted" on Accept, or
+  // reopens the choice via a "Cookie settings" footer link.
+  function initCookieConsent() {
+    var STORAGE_KEY = 'xokoro_consent';
+    var banner;
+
+    function updateConsent(granted) {
+      var state = {
+        ad_storage: granted ? 'granted' : 'denied',
+        analytics_storage: granted ? 'granted' : 'denied',
+        ad_user_data: granted ? 'granted' : 'denied',
+        ad_personalization: granted ? 'granted' : 'denied'
+      };
+      if (window.gtag) {
+        window.gtag('consent', 'update', state);
+      } else {
+        window.dataLayer = window.dataLayer || [];
+        window.dataLayer.push(['consent', 'update', state]);
+      }
+    }
+
+    function buildBanner() {
+      var el = document.createElement('div');
+      el.className = 'xok-cookie-banner';
+      el.innerHTML =
+        '<div class="xok-cookie-copy">This site uses cookies for basic analytics, to understand which pieces people look at. <a href="info.html#privacy">Privacy</a></div>' +
+        '<div class="xok-cookie-actions">' +
+        '<button type="button" class="btn btn-outline-dark" data-cookie-decline>Decline</button>' +
+        '<button type="button" class="btn btn-accent" data-cookie-accept>Accept</button>' +
+        '</div>';
+      document.body.appendChild(el);
+      return el;
+    }
+
+    function show() {
+      if (!banner) banner = buildBanner();
+      requestAnimationFrame(function () { banner.classList.add('is-open'); });
+    }
+    function hide() {
+      if (banner) banner.classList.remove('is-open');
+    }
+
+    var stored;
+    try { stored = localStorage.getItem(STORAGE_KEY); } catch (e) { stored = null; }
+
+    if (stored === 'granted') {
+      updateConsent(true);
+    } else if (stored !== 'denied') {
+      show();
+    }
+
+    document.body.addEventListener('click', function (e) {
+      var t = e.target;
+      if (t.closest && t.closest('[data-cookie-accept]')) {
+        try { localStorage.setItem(STORAGE_KEY, 'granted'); } catch (err) {}
+        updateConsent(true);
+        hide();
+      } else if (t.closest && t.closest('[data-cookie-decline]')) {
+        try { localStorage.setItem(STORAGE_KEY, 'denied'); } catch (err) {}
+        hide();
+      } else if (t.closest && t.closest('[data-cookie-settings]')) {
+        show();
+      }
+    });
+  }
+
   /* ---------------- Mark current nav link ---------------- */
   function markCurrentNav() {
     var here = (location.pathname.split('/').pop() || 'index.html');
@@ -251,6 +320,7 @@
     initNav();
     initFooterYear();
     initSubscribe();
+    initCookieConsent();
     markCurrentNav();
   });
 })();
