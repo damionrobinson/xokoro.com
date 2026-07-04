@@ -156,8 +156,8 @@
       material.textContent = p.material;
 
       a.addEventListener('click', function () {
-        if (window.xokoroTrack) {
-          window.xokoroTrack('select_item', {
+        if (window.xokoroTrackEcommerce) {
+          window.xokoroTrackEcommerce('select_item', {
             items: [{ item_id: p.id, item_name: p.title, price: p.price }]
           });
         }
@@ -253,8 +253,8 @@
     var product = products.find(function (p) { return p.id === id; }) || products[0];
     if (!product) return;
 
-    if (window.xokoroTrack) {
-      window.xokoroTrack('view_item', {
+    if (window.xokoroTrackEcommerce) {
+      window.xokoroTrackEcommerce('view_item', {
         items: [{ item_id: product.id, item_name: product.title, price: product.price }]
       });
     }
@@ -380,8 +380,8 @@
         titleEl.textContent = product.title + ' — ' + product._no;
         priceEl.textContent = money(product.price);
         checkoutOverlay.classList.add('is-open');
-        if (window.xokoroTrack) {
-          window.xokoroTrack('begin_checkout', {
+        if (window.xokoroTrackEcommerce) {
+          window.xokoroTrackEcommerce('begin_checkout', {
             currency: 'GBP',
             value: product.price,
             items: [{ item_id: product.id, item_name: product.title, price: product.price }]

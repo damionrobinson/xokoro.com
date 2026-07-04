@@ -45,6 +45,18 @@
   }
   window.xokoroTrack = track;
 
+  // Ecommerce events (view_item, select_item, begin_checkout) need their
+  // item data nested under an "ecommerce" key for GTM's "Send Ecommerce
+  // data" option to find it — a flat push won't populate GA4's Items
+  // reports. Clearing ecommerce first stops a previous event's items from
+  // bleeding into the next one (a well-known GA4/GTM gotcha).
+  function trackEcommerce(eventName, ecommerceData) {
+    window.dataLayer = window.dataLayer || [];
+    window.dataLayer.push({ ecommerce: null });
+    window.dataLayer.push({ event: eventName, ecommerce: ecommerceData });
+  }
+  window.xokoroTrackEcommerce = trackEcommerce;
+
   function getDeviceInfo() {
     var ua = navigator.userAgent;
     var m = ua.match(/\(([^)]+)\)/);
