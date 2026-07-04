@@ -155,6 +155,14 @@
       material.className = 'xok-card-material';
       material.textContent = p.material;
 
+      a.addEventListener('click', function () {
+        if (window.xokoroTrack) {
+          window.xokoroTrack('select_item', {
+            items: [{ item_id: p.id, item_name: p.title, price: p.price }]
+          });
+        }
+      });
+
       a.appendChild(imgWrap);
       a.appendChild(row);
       a.appendChild(material);
@@ -244,6 +252,12 @@
     var id = params.get('id');
     var product = products.find(function (p) { return p.id === id; }) || products[0];
     if (!product) return;
+
+    if (window.xokoroTrack) {
+      window.xokoroTrack('view_item', {
+        items: [{ item_id: product.id, item_name: product.title, price: product.price }]
+      });
+    }
 
     var variantIndex = 0;
     var imgIndex = 0;
@@ -366,6 +380,13 @@
         titleEl.textContent = product.title + ' — ' + product._no;
         priceEl.textContent = money(product.price);
         checkoutOverlay.classList.add('is-open');
+        if (window.xokoroTrack) {
+          window.xokoroTrack('begin_checkout', {
+            currency: 'GBP',
+            value: product.price,
+            items: [{ item_id: product.id, item_name: product.title, price: product.price }]
+          });
+        }
       }
       function closeCheckout() { checkoutOverlay.classList.remove('is-open'); }
 

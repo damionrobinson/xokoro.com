@@ -16,6 +16,35 @@
   // access "Anyone").
   var SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxRP5vUbiFXHPE1frplx1Gz9hqvytw4zRZU4n_kIVFRWdwFbcPfvJ0pnlP6dxj9ACiJRQ/exec';
 
+  // reCAPTCHA v3 site key (public — the matching secret key lives only in
+  // the Apps Script, which is where verification actually happens).
+  var RECAPTCHA_SITE_KEY = '6Lf280QtAAAAAMzj6UFqKdcvyTGwpMXFpKMaigfT';
+
+  // Fetches a fresh, action-scoped reCAPTCHA token. Resolves to null (rather
+  // than rejecting) if the script hasn't loaded, so a slow/blocked network
+  // request degrades to "no token" instead of breaking form submission.
+  function getRecaptchaToken(action) {
+    return new Promise(function (resolve) {
+      if (!window.grecaptcha || !window.grecaptcha.ready) { resolve(null); return; }
+      window.grecaptcha.ready(function () {
+        window.grecaptcha.execute(RECAPTCHA_SITE_KEY, { action: action })
+          .then(resolve)
+          .catch(function () { resolve(null); });
+      });
+    });
+  }
+  window.xokoroGetRecaptchaToken = getRecaptchaToken;
+
+  // Pushes an event to GTM's dataLayer (container GTM-WSL549VM, loaded from
+  // each page's <head>). This doesn't call gtag directly — GTM owns the
+  // dataLayer and any tag configured inside it (GA4, etc.) picks events up
+  // from there, so nothing here needs to change when tags are added later.
+  function track(eventName, params) {
+    window.dataLayer = window.dataLayer || [];
+    window.dataLayer.push(Object.assign({ event: eventName }, params || {}));
+  }
+  window.xokoroTrack = track;
+
   function getDeviceInfo() {
     var ua = navigator.userAgent;
     var m = ua.match(/\(([^)]+)\)/);
@@ -47,9 +76,12 @@
   window.xokoroSubmitToSheet = submitToSheet;
 
   function submitSubscriber(name, email) {
-    return getLocationInfo().then(function (location) {
+    return Promise.all([getLocationInfo(), getRecaptchaToken('subscribe')]).then(function (results) {
+      var location = results[0];
+      var token = results[1];
       return submitToSheet({
         formType: 'subscribe',
+        recaptchaToken: token,
         name: name,
         email: email,
         location: location,
@@ -103,6 +135,7 @@
     var origin = (location.origin && location.origin !== 'null') ? location.origin + location.pathname.replace(/[^/]*$/, '') : 'https://xokoro.com/';
     var url = origin + 'product.html?id=' + encodeURIComponent(slug);
     var data = { title: 'Xokoro — ' + title, text: title + ' · ' + no, url: url };
+    track('share', { content_type: 'product', item_id: slug });
     if (navigator.share) {
       navigator.share(data).catch(function () {});
       showToast('Opening share…');
@@ -175,6 +208,7 @@
           try { localStorage.setItem('xokoro_sub_seen', '1'); } catch (e) {}
           form.style.display = 'none';
           if (success) success.style.display = 'block';
+          track('generate_lead', { method: 'newsletter' });
         }).catch(function () {
           errorEl.textContent = 'Something went wrong. Please try again.';
           errorEl.style.display = 'block';
