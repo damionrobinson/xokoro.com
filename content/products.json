@@ -22,28 +22,31 @@
       "category": "Necklace"
     },
     {
-      "material": "Emerald",
-      "price": 134,
+      "material": "Textile, Silver",
+      "price": 166,
       "materials": [
-        "Emerald",
-        "fresh water",
-        "pearls"
+        "String",
+        "Silver",
+        "Beads"
       ],
-      "colour": "Plummy",
+      "colour": "Blue",
       "variants": [
         {
-          "swatch": "#c33434",
-          "name": "red"
+          "name": "Pink",
+          "swatch": "#80064a",
+          "images": [
+            "/assets/img/uploads/aster-studs-1.svg"
+          ]
         }
       ],
-      "title": "Damion Test",
+      "title": "Blue Velvet, Kilimangaro Earrings",
       "images": [
-        "/assets/img/uploads/screenshot-2022-09-05-at-14.42.12.png",
-        "/assets/img/uploads/aster-studs-1.svg"
+        "/assets/img/uploads/screenshot-2026-07-04-at-17.25.32.png",
+        "/assets/img/uploads/screenshot-2026-07-04-at-17.29.17.png"
       ],
-      "tag": "Made to order",
-      "id": "damion-test",
-      "description": "emrald, black water stones",
+      "tag": "Ready to ship",
+      "id": "blue-velvet-kilimangaro-earrings",
+      "description": "Ayala Bar earrings - Fall/Winter 2020-21 Classic Collection Width: 0.75″ / 1.91 cm | Length: 2.4″ / 6.1 cm",
       "category": "Earrings"
     }
   ]
