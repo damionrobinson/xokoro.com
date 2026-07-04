@@ -3,23 +3,18 @@
  * Sticky nav, footer year, the "studio list" newsletter popup,
  * and a small toast helper used by the product feed's share button.
  *
- * The newsletter popup posts to the same Google Form used by the
- * previous coming-soon page (see GOOGLE_FORM_CONFIG below) so
- * sign-ups keep landing in the same spreadsheet.
+ * Both the newsletter popup and the About page contact form post JSON to
+ * a single Google Apps Script web app (see google-apps-script/apps-script.gs),
+ * which appends a row to the matching tab ("Subscribers" or "Requests") in
+ * one shared Google Sheet.
  */
 (function () {
   'use strict';
 
-  var GOOGLE_FORM_CONFIG = {
-    url: 'https://docs.google.com/forms/d/e/1FAIpQLSd7Rn_UfGTsGdTNvLpMAZMH_cNqPFaQtnHOmadRP0h7KYlnyA/formResponse',
-    fields: {
-      name: 'entry.1776671031',
-      email: 'entry.556623961',
-      location: 'entry.1358020764',
-      browser: 'entry.1026458690',
-      device: 'entry.709745366'
-    }
-  };
+  // Deploy google-apps-script/apps-script.gs as a web app and paste its
+  // /exec URL here (Deploy > New deployment > Web app > Execute as "Me",
+  // access "Anyone").
+  var SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxRP5vUbiFXHPE1frplx1Gz9hqvytw4zRZU4n_kIVFRWdwFbcPfvJ0pnlP6dxj9ACiJRQ/exec';
 
   function getDeviceInfo() {
     var ua = navigator.userAgent;
@@ -37,15 +32,30 @@
       .catch(function () { return 'Unknown'; });
   }
 
-  function submitToGoogleForm(name, email) {
+  // Shared submit helper — posts as text/plain (no CORS preflight) with a
+  // JSON string body; Apps Script reads the raw body regardless of the
+  // declared content type. Used with mode:'no-cors' so we can't read the
+  // response, but that also means it can't throw on a real network send.
+  function submitToSheet(payload) {
+    return fetch(SHEET_ENDPOINT, {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+      body: JSON.stringify(payload)
+    });
+  }
+  window.xokoroSubmitToSheet = submitToSheet;
+
+  function submitSubscriber(name, email) {
     return getLocationInfo().then(function (location) {
-      var fd = new FormData();
-      fd.append(GOOGLE_FORM_CONFIG.fields.name, name);
-      fd.append(GOOGLE_FORM_CONFIG.fields.email, email);
-      fd.append(GOOGLE_FORM_CONFIG.fields.location, location);
-      fd.append(GOOGLE_FORM_CONFIG.fields.browser, navigator.userAgent);
-      fd.append(GOOGLE_FORM_CONFIG.fields.device, getDeviceInfo());
-      return fetch(GOOGLE_FORM_CONFIG.url, { method: 'POST', mode: 'no-cors', body: fd });
+      return submitToSheet({
+        formType: 'subscribe',
+        name: name,
+        email: email,
+        location: location,
+        browser: navigator.userAgent,
+        device: getDeviceInfo()
+      });
     });
   }
 
@@ -161,7 +171,7 @@
 
         var btn = form.querySelector('button[type="submit"]');
         if (btn) btn.disabled = true;
-        submitToGoogleForm(name, email).then(function () {
+        submitSubscriber(name, email).then(function () {
           try { localStorage.setItem('xokoro_sub_seen', '1'); } catch (e) {}
           form.style.display = 'none';
           if (success) success.style.display = 'block';

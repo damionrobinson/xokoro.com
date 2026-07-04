@@ -58,7 +58,6 @@
       </form>
       <div class="xok-form-success" id="xok-contact-success" style="display:none;">
         Thank you — your message is on its way. I read every one myself.
-        <small>This form isn't wired to a mailbox yet — ask me to connect it (Formspree, a Google Form, or your email provider all work) once you're ready to receive real enquiries.</small>
       </div>
     </div>
   </div>
@@ -105,6 +104,7 @@
   (function () {
     var form = document.getElementById('xok-contact-form');
     var errorEl = document.getElementById('xok-contact-error');
+    var defaultErrorText = errorEl.textContent;
     var successEl = document.getElementById('xok-contact-success');
     var hpInput = form.querySelector('.xok-hp');
     var loadedAt = Date.now();
@@ -127,11 +127,13 @@
       var email = form.cEmail.value.trim();
       var msg = form.cMsg.value.trim();
       if (!name || email.indexOf('@') === -1 || !msg) {
+        errorEl.textContent = defaultErrorText;
         errorEl.style.display = 'block';
         return;
       }
       // Spam trap: filled honeypot, or a submit too fast for a human to have
-      // typed a name, email and message. Pretend it worked either way.
+      // typed a name, email and message. Pretend it worked either way,
+      // without actually sending anything.
       if ((hpInput && hpInput.value) || (Date.now() - loadedAt < 2500)) {
         form.reset();
         form.style.display = 'none';
@@ -139,8 +141,27 @@
         return;
       }
       errorEl.style.display = 'none';
-      form.style.display = 'none';
-      successEl.style.display = 'block';
+
+      var selectedType = document.querySelector('.xok-type-btn.is-selected');
+      var enquiryType = selectedType ? selectedType.getAttribute('data-type') : 'general';
+      var submitBtn = form.querySelector('button[type="submit"]');
+      if (submitBtn) submitBtn.disabled = true;
+
+      window.xokoroSubmitToSheet({
+        formType: 'contact',
+        type: enquiryType,
+        name: name,
+        email: email,
+        message: msg
+      }).then(function () {
+        form.reset();
+        form.style.display = 'none';
+        successEl.style.display = 'block';
+      }).catch(function () {
+        errorEl.textContent = 'Something went wrong sending that — please try again.';
+        errorEl.style.display = 'block';
+        if (submitBtn) submitBtn.disabled = false;
+      });
     });
   })();
 </script>
