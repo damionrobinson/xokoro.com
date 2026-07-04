@@ -20,6 +20,31 @@
       "id": "nightjar-necklace",
       "description": "Nightjar began with one strand of freshwater pearl and a question about how far onyx could carry a form this quiet. Finished entirely by hand in the studio.",
       "category": "Necklace"
+    },
+    {
+      "material": "Emerald",
+      "price": 134,
+      "materials": [
+        "Emerald",
+        "fresh water",
+        "pearls"
+      ],
+      "colour": "Plummy",
+      "variants": [
+        {
+          "swatch": "#c33434",
+          "name": "red"
+        }
+      ],
+      "title": "Damion Test",
+      "images": [
+        "/assets/img/uploads/screenshot-2022-09-05-at-14.42.12.png",
+        "/assets/img/uploads/aster-studs-1.svg"
+      ],
+      "tag": "Made to order",
+      "id": "damion-test",
+      "description": "emrald, black water stones",
+      "category": "Earrings"
     }
   ]
 }
