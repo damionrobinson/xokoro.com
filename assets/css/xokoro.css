@@ -70,7 +70,19 @@ body.no-hero .xok-nav-link{ color:var(--ink); }
   font-size:15px;letter-spacing:.02em;color:var(--paper);
   background:none;border:none;
 }
-.xok-nav-link.is-current{color:var(--accent) !important;}
+/* Over the dark hero (nav transparent), the accent maroon is too close to
+   the hero's own colours to read — keep the current-page link light there
+   and mark it with an underline instead. Once solid (scrolled, or any
+   non-hero page) it switches to the accent colour against the light nav. */
+.xok-nav:not(.is-solid) .xok-nav-link.is-current{
+  color:var(--paper) !important;
+  text-decoration:underline;
+  text-underline-offset:4px;
+}
+.xok-nav.is-solid .xok-nav-link.is-current,
+body.no-hero .xok-nav-link.is-current{
+  color:var(--accent) !important;
+}
 .xok-nav-toggle{display:none;}
 
 /* pages without a hero: nav always solid */
@@ -410,6 +422,13 @@ body.no-hero .xok-nav{
 }
 .xok-sub-fineprint{font-family:var(--mono);font-size:10px;line-height:1.6;color:var(--ink);opacity:.5;}
 .xok-sub-modal .xok-modal-close{color:var(--paper);}
+
+/* Honeypot spam-trap field: invisible and unreachable for real visitors,
+   but plain form-filling bots tend to fill in every input they find. */
+.xok-hp{
+  position:absolute !important;left:-9999px !important;top:auto;width:1px;height:1px;
+  opacity:0;overflow:hidden;pointer-events:none;
+}
 
 .xok-toast{
   position:fixed;bottom:28px;left:50%;transform:translateX(-50%);z-index:120;

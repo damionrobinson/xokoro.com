@@ -116,10 +116,13 @@
     var errorEl = overlay.querySelector('.xok-form-error');
     var nameInput = overlay.querySelector('[name="sName"]');
     var emailInput = overlay.querySelector('[name="sEmail"]');
+    var hpInput = overlay.querySelector('.xok-hp');
     var closeBtns = overlay.querySelectorAll('[data-sub-close]');
     var openBtns = document.querySelectorAll('[data-sub-open]');
+    var openedAt = Date.now();
 
     function open() {
+      openedAt = Date.now();
       overlay.classList.add('is-open');
     }
     function close() {
@@ -143,6 +146,19 @@
           return;
         }
         errorEl.style.display = 'none';
+
+        // Spam trap: a filled honeypot field, or a submit faster than any
+        // human could plausibly fill the form, both mean a bot. Show the
+        // normal success state without actually sending anything, so
+        // automated scripts get no signal that they were caught.
+        var looksLikeBot = (hpInput && hpInput.value) || (Date.now() - openedAt < 2500);
+        if (looksLikeBot) {
+          form.reset();
+          form.style.display = 'none';
+          if (success) success.style.display = 'block';
+          return;
+        }
+
         var btn = form.querySelector('button[type="submit"]');
         if (btn) btn.disabled = true;
         submitToGoogleForm(name, email).then(function () {
