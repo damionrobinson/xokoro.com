@@ -36,7 +36,10 @@
 
   <script>
     var NETLIFY_SITE_URL = "https://rainbow-kringle-12483a.netlify.app";
-    var auth = new GoTrue({ APIUrl: NETLIFY_SITE_URL + "/.netlify/identity" });
+    // This CDN bundle exposes a module namespace object ({ default: GoTrue, ... })
+    // rather than the class itself, so pull .default with a plain-class fallback.
+    var GoTrueCtor = (typeof GoTrue === "function") ? GoTrue : GoTrue.default;
+    var auth = new GoTrueCtor({ APIUrl: NETLIFY_SITE_URL + "/.netlify/identity" });
 
     var inviteMatch = location.hash.match(/invite_token=([^&]+)/);
     var recoveryMatch = location.hash.match(/recovery_token=([^&]+)/);
