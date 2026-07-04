@@ -62,7 +62,7 @@ collections:
               - label: "Availability"
                 name: "tag"
                 widget: "select"
-                options: ["Ready to ship", "Made to order"]
+                options: ["Ready to ship", "Made to order", "Sold"]
                 default: "Ready to ship"
 
               - label: "Description"

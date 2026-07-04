@@ -187,6 +187,12 @@ body.no-hero .xok-nav{
 }
 .xok-tag.tag-ready{color:var(--ok);border-color:var(--ok);}
 .xok-tag.tag-order{color:var(--accent);border-color:var(--accent);}
+.xok-tag.tag-sold{color:#141414;opacity:.55;border-color:#14141440;}
+.xok-card.is-sold .xok-card-img{opacity:.55;}
+.xok-sold-notice{
+  font-family:var(--mono);font-size:13px;letter-spacing:.04em;color:#141414;opacity:.7;
+  border:1px solid #14141428;padding:16px 18px;max-width:420px;
+}
 .xok-card-share{
   position:absolute;bottom:12px;right:12px;width:36px;height:36px;border-radius:50%;
   border:none;background:rgba(250,250,248,.92);cursor:pointer;color:var(--ink);

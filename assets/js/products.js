@@ -37,6 +37,7 @@
   function tagClass(tag) {
     if (tag === 'Ready to ship') return 'tag-ready';
     if (tag === 'Made to order') return 'tag-order';
+    if (tag === 'Sold') return 'tag-sold';
     return '';
   }
 
@@ -110,7 +111,7 @@
 
     function card(p) {
       var a = document.createElement('a');
-      a.className = 'xok-card';
+      a.className = 'xok-card' + (p.tag === 'Sold' ? ' is-sold' : '');
       a.href = 'product.html?id=' + encodeURIComponent(p.id);
 
       var imgWrap = document.createElement('div');
@@ -248,7 +249,11 @@
     var imgIndex = 0;
 
     function currentImages() {
-      if (product.variants && product.variants.length) return product.variants[variantIndex].images || [];
+      var variant = product.variants && product.variants[variantIndex];
+      if (variant && variant.images && variant.images.length) return variant.images;
+      // Falls back to the product's own photos if the selected colourway
+      // doesn't have its own set yet (e.g. a variant was added before
+      // photos were uploaded for it).
       return product.images || [];
     }
 
@@ -340,9 +345,18 @@
     var shareBtn = document.getElementById('xok-share-btn');
     if (shareBtn) shareBtn.addEventListener('click', function () { window.xokoroShare(product.title, product._no, product.id); });
 
-    // checkout stub
+    // checkout stub — skipped entirely for sold pieces, which get a notice instead
+    var ctaGroup = document.querySelector('.xok-cta-group');
+    if (product.tag === 'Sold' && ctaGroup) {
+      ctaGroup.innerHTML = '';
+      var soldNotice = document.createElement('div');
+      soldNotice.className = 'xok-sold-notice';
+      soldNotice.textContent = 'This piece has been sold. Its page stays up as a record of the work — get in touch if you\'d like something similar made.';
+      ctaGroup.appendChild(soldNotice);
+    }
+
     var checkoutOverlay = document.querySelector('.xok-checkout-overlay');
-    if (checkoutOverlay) {
+    if (checkoutOverlay && product.tag !== 'Sold') {
       var kindEl = checkoutOverlay.querySelector('.xok-modal-kicker');
       var titleEl = checkoutOverlay.querySelector('h3');
       var priceEl = checkoutOverlay.querySelector('.xok-modal-price');
