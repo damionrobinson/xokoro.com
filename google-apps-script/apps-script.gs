@@ -1,5 +1,5 @@
 /**
- * Xokoro — form intake script
+ * Xokoro.com — form intake script
  *
  * Receives JSON POSTs from the newsletter popup and the About page contact
  * form (both on xokoro.com) and appends a row to the matching tab in this
