@@ -20,25 +20,6 @@
       "id": "nightjar-necklace",
       "description": "Nightjar began with one strand of freshwater pearl and a question about how far onyx could carry a form this quiet. Finished entirely by hand in the studio.",
       "category": "Necklace"
-    },
-    {
-      "material": "String",
-      "price": 123,
-      "materials": [
-        "Leather",
-        "String",
-        "Water"
-      ],
-      "colour": "Grey",
-      "variants": [],
-      "title": "Damion Test",
-      "images": [
-        "/assets/img/uploads/screenshot-2026-07-04-at-17.25.32.png"
-      ],
-      "tag": "Ready to ship",
-      "id": "damion-test-2",
-      "description": "Description",
-      "category": "Necklace"
     }
   ]
 }
