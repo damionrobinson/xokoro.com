@@ -114,14 +114,26 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </div>
 </footer>
 
-<!-- Checkout stub -->
 <div class="xok-modal-overlay xok-checkout-overlay">
   <div class="xok-modal">
     <div class="xok-modal-kicker">For yourself</div>
     <h3></h3>
-    <div class="xok-modal-price"></div>
-    <div class="xok-paypal-stub">Pay with PayPal</div>
-    <p class="xok-modal-note">Demo stub. Drop in the live PayPal Business Client ID and the SDK buttons render here — no backend required.</p>
+    <div class="xok-modal-price" id="xok-modal-item-price"></div>
+
+    <div style="display:flex;flex-direction:column;gap:9px;margin-bottom:20px;">
+      <span style="font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink);opacity:.7;">Shipping to</span>
+      <div class="xok-contact-types">
+        <button type="button" class="xok-type-btn is-selected" data-ship-zone="local" data-ship-fee="9">United Kingdom — £9</button>
+        <button type="button" class="xok-type-btn" data-ship-zone="intl" data-ship-fee="20">Outside the UK — £20</button>
+      </div>
+    </div>
+
+    <div class="xok-modal-price" id="xok-modal-total-price"></div>
+
+    <div id="xok-paypal-buttons"></div>
+    <div class="xok-form-success xok-checkout-success" style="display:none;"></div>
+    <div class="xok-form-error xok-checkout-error" style="display:none;"></div>
+    <p class="xok-modal-note">Payments are processed securely by PayPal. You'll enter your delivery address as part of PayPal checkout.</p>
     <button class="xok-modal-close" data-checkout-close aria-label="Close">✕</button>
   </div>
 </div>
@@ -149,6 +161,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <div class="xok-toast"></div>
 
 <script src="assets/js/site.js" defer></script>
+<!-- Sandbox client ID for testing. Swap for the Live client ID once test
+     purchases work end to end (developer.paypal.com > Apps & Credentials > Live). -->
+<script src="https://www.paypal.com/sdk/js?client-id=AWe0EDs0qTmsLvu0VRCEOjwI426kwY5r39wY15nPmCxaiZqFDawmj0bSxD7gPV4zJ5Wu3gBEgH1vRWiq&currency=GBP" defer></script>
 <script src="assets/js/products.js" defer></script>
 </body>
 </html>

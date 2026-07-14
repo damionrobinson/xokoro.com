@@ -373,20 +373,113 @@
     if (checkoutOverlay && product.tag !== 'Sold') {
       var kindEl = checkoutOverlay.querySelector('.xok-modal-kicker');
       var titleEl = checkoutOverlay.querySelector('h3');
-      var priceEl = checkoutOverlay.querySelector('.xok-modal-price');
+      var itemPriceEl = checkoutOverlay.querySelector('#xok-modal-item-price');
+      var totalPriceEl = checkoutOverlay.querySelector('#xok-modal-total-price');
+      var shipButtons = checkoutOverlay.querySelectorAll('[data-ship-zone]');
+      var paypalContainer = checkoutOverlay.querySelector('#xok-paypal-buttons');
+      var checkoutSuccess = checkoutOverlay.querySelector('.xok-checkout-success');
+      var checkoutError = checkoutOverlay.querySelector('.xok-checkout-error');
+      var checkoutNote = checkoutOverlay.querySelector('.xok-modal-note');
+      var shipFee = 9; // defaults to the UK button, which starts pre-selected
+
+      function updatePriceDisplay() {
+        itemPriceEl.textContent = money(product.price) + ' + ' + money(shipFee) + ' shipping';
+        totalPriceEl.textContent = 'Total: ' + money(product.price + shipFee);
+      }
+
+      shipButtons.forEach(function (b) {
+        b.addEventListener('click', function () {
+          shipButtons.forEach(function (o) { o.classList.remove('is-selected'); });
+          b.classList.add('is-selected');
+          shipFee = Number(b.getAttribute('data-ship-fee'));
+          updatePriceDisplay();
+          renderPaypalButtons(kindEl.textContent);
+        });
+      });
+
+      function renderPaypalButtons(kind) {
+        paypalContainer.innerHTML = '';
+        if (!window.paypal || !window.paypal.Buttons) {
+          checkoutError.textContent = 'Payment isn\'t available right now — please try again in a moment.';
+          checkoutError.style.display = 'block';
+          return;
+        }
+        var variant = product.variants && product.variants[variantIndex];
+        var description = (product.title + (variant ? ' — ' + variant.name : '') + ' (' + kind + ')').slice(0, 127);
+        var itemValue = product.price.toFixed(2);
+        var shipValue = shipFee.toFixed(2);
+        var totalValue = (product.price + shipFee).toFixed(2);
+
+        window.paypal.Buttons({
+          style: { layout: 'vertical', color: 'black', shape: 'rect', label: 'paypal' },
+          createOrder: function (data, actions) {
+            return actions.order.create({
+              purchase_units: [{
+                description: description,
+                amount: {
+                  currency_code: 'GBP',
+                  value: totalValue,
+                  breakdown: {
+                    item_total: { currency_code: 'GBP', value: itemValue },
+                    shipping: { currency_code: 'GBP', value: shipValue }
+                  }
+                },
+                items: [{
+                  name: product.title.slice(0, 127),
+                  quantity: '1',
+                  unit_amount: { currency_code: 'GBP', value: itemValue },
+                  category: 'PHYSICAL_GOODS'
+                }]
+              }]
+            });
+          },
+          onApprove: function (data, actions) {
+            return actions.order.capture().then(function (details) {
+              paypalContainer.style.display = 'none';
+              shipButtons.forEach(function (b) { b.disabled = true; });
+              if (checkoutNote) checkoutNote.style.display = 'none';
+              var firstName = details.payer && details.payer.name && details.payer.name.given_name;
+              checkoutSuccess.textContent = 'Thank you' + (firstName ? ', ' + firstName : '') + ' — your payment is confirmed. I\'ll be in touch by email to arrange next steps.';
+              checkoutSuccess.style.display = 'block';
+              if (window.xokoroTrackEcommerce) {
+                window.xokoroTrackEcommerce('purchase', {
+                  transaction_id: details.id,
+                  currency: 'GBP',
+                  value: product.price + shipFee,
+                  shipping: shipFee,
+                  items: [{ item_id: product.id, item_name: product.title, price: product.price }]
+                });
+              }
+            });
+          },
+          onError: function (err) {
+            console.error(err);
+            checkoutError.textContent = 'Something went wrong with that payment. Please try again, or get in touch if it keeps happening.';
+            checkoutError.style.display = 'block';
+          }
+        }).render(paypalContainer);
+      }
 
       function openCheckout(kind) {
         kindEl.textContent = kind;
         titleEl.textContent = product.title + ' — ' + product._no;
-        priceEl.textContent = money(product.price);
+        shipFee = 9;
+        shipButtons.forEach(function (b) { b.classList.toggle('is-selected', b.getAttribute('data-ship-zone') === 'local'); b.disabled = false; });
+        updatePriceDisplay();
+        checkoutSuccess.style.display = 'none';
+        checkoutError.style.display = 'none';
+        paypalContainer.style.display = 'block';
+        if (checkoutNote) checkoutNote.style.display = 'block';
         checkoutOverlay.classList.add('is-open');
         if (window.xokoroTrackEcommerce) {
           window.xokoroTrackEcommerce('begin_checkout', {
             currency: 'GBP',
-            value: product.price,
+            value: product.price + shipFee,
+            shipping: shipFee,
             items: [{ item_id: product.id, item_name: product.title, price: product.price }]
           });
         }
+        renderPaypalButtons(kind);
       }
       function closeCheckout() { checkoutOverlay.classList.remove('is-open'); }
 
