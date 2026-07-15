@@ -65,6 +65,22 @@ collections:
                 options: ["Ready to ship", "Made to order", "Sold"]
                 default: "Ready to ship"
 
+              - label: "Weight (grams, packaged)"
+                name: "weight"
+                widget: "number"
+                value_type: "int"
+                min: 1
+                default: 50
+                hint: "Weight of the piece as it will be posted, including the gift box. Used to work out the shipping fee — rings/earrings/pendants are usually well under 100g."
+
+              - label: "Stock (how many exist)"
+                name: "stock"
+                widget: "number"
+                value_type: "int"
+                min: 0
+                default: 1
+                hint: "How many of this exact piece you have to sell. Use 1 for a genuine one-off. The cart won't let anyone order more than this."
+
               - label: "Description"
                 name: "description"
                 widget: "text"

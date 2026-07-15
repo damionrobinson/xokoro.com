@@ -17,6 +17,8 @@
         "/assets/img/products/nightjar-necklace-3.svg"
       ],
       "tag": "Ready to ship",
+      "weight": 60,
+      "stock": 1,
       "id": "nightjar-necklace",
       "description": "Nightjar began with one strand of freshwater pearl and a question about how far onyx could carry a form this quiet. Finished entirely by hand in the studio.",
       "category": "Necklace"

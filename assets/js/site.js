@@ -316,11 +316,101 @@
     });
   }
 
+  /* ---------------- Cart storage ----------------
+   * Persisted to localStorage so it survives page navigation (this is a
+   * multi-page static site, not a single-page app). Lines are keyed by
+   * product id + variant index. The richer cart drawer UI (assets/js/cart.js)
+   * reads/writes through this same API so the badge count here always stays
+   * correct no matter which page added or changed something.
+   */
+  var CART_KEY = 'xokoro_cart';
+
+  function readCart() {
+    try {
+      var raw = localStorage.getItem(CART_KEY);
+      var cart = raw ? JSON.parse(raw) : [];
+      return Array.isArray(cart) ? cart : [];
+    } catch (e) { return []; }
+  }
+
+  function writeCart(cart) {
+    try { localStorage.setItem(CART_KEY, JSON.stringify(cart)); } catch (e) {}
+    updateCartBadge(cart);
+    return cart;
+  }
+
+  function findCartLine(cart, id, variantIndex) {
+    variantIndex = variantIndex || 0;
+    for (var i = 0; i < cart.length; i++) {
+      if (cart[i].id === id && (cart[i].variantIndex || 0) === variantIndex) return i;
+    }
+    return -1;
+  }
+
+  function addToCart(id, variantIndex, qty, maxStock) {
+    var cart = readCart();
+    var idx = findCartLine(cart, id, variantIndex);
+    var stock = typeof maxStock === 'number' ? maxStock : 99;
+    if (idx > -1) {
+      cart[idx].qty = Math.max(1, Math.min(stock, cart[idx].qty + (qty || 1)));
+    } else if (stock > 0) {
+      cart.push({ id: id, variantIndex: variantIndex || 0, qty: Math.max(1, Math.min(stock, qty || 1)) });
+    }
+    return writeCart(cart);
+  }
+
+  function setCartQty(id, variantIndex, qty, maxStock) {
+    var cart = readCart();
+    var idx = findCartLine(cart, id, variantIndex);
+    var stock = typeof maxStock === 'number' ? maxStock : 99;
+    if (idx > -1) {
+      var q = Math.max(0, Math.min(stock, qty));
+      if (q <= 0) cart.splice(idx, 1);
+      else cart[idx].qty = q;
+    }
+    return writeCart(cart);
+  }
+
+  function removeFromCart(id, variantIndex) {
+    var cart = readCart();
+    var idx = findCartLine(cart, id, variantIndex);
+    if (idx > -1) cart.splice(idx, 1);
+    return writeCart(cart);
+  }
+
+  function clearCart() {
+    return writeCart([]);
+  }
+
+  function cartCount(cart) {
+    cart = cart || readCart();
+    return cart.reduce(function (sum, line) { return sum + line.qty; }, 0);
+  }
+
+  function updateCartBadge(cart) {
+    var count = cartCount(cart);
+    document.querySelectorAll('.xok-cart-count').forEach(function (el) {
+      el.textContent = String(count);
+      el.style.display = count > 0 ? 'inline-flex' : 'none';
+    });
+  }
+
+  window.xokoroCart = {
+    read: readCart,
+    add: addToCart,
+    setQty: setCartQty,
+    remove: removeFromCart,
+    clear: clearCart,
+    count: cartCount,
+    updateBadge: updateCartBadge
+  };
+
   document.addEventListener('DOMContentLoaded', function () {
     initNav();
     initFooterYear();
     initSubscribe();
     initCookieConsent();
     markCurrentNav();
+    updateCartBadge();
   });
 })();

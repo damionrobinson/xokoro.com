@@ -55,6 +55,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <a href="index.html" class="xok-nav-link unset-btn" data-page="index.html">Shop</a>
       <a href="info.html" class="xok-nav-link unset-btn" data-page="info.html">Info</a>
       <a href="about.html" class="xok-nav-link unset-btn" data-page="about.html">About</a>
+      <button type="button" class="xok-nav-link xok-cart-btn unset-btn" data-cart-open aria-label="Cart">Cart<span class="xok-cart-count" style="display:none;">0</span></button>
     </div>
   </div>
 </nav>
@@ -87,9 +88,14 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       </div>
 
       <div class="xok-cta-group">
-        <button class="btn btn-accent" id="xok-buy-self">Claim This Piece</button>
-        <button class="btn btn-outline-dark" id="xok-buy-gift">Gift the Unexpected</button>
+        <div class="xok-cart-line-qty xok-add-qty" id="xok-add-qty-wrap">
+          <button type="button" id="xok-add-qty-dec" aria-label="Decrease quantity">−</button>
+          <span id="xok-add-qty-value">1</span>
+          <button type="button" id="xok-add-qty-inc" aria-label="Increase quantity">+</button>
+        </div>
+        <button class="btn btn-accent" id="xok-add-to-cart">Add to Cart</button>
       </div>
+      <p class="xok-modal-note" id="xok-add-note" style="display:none;"></p>
 
       <div class="xok-materials">
         <div class="xok-materials-label">Materials</div>
@@ -113,30 +119,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <div class="xok-copyright">© <span data-year></span> Xokoro — made by hand</div>
   </div>
 </footer>
-
-<div class="xok-modal-overlay xok-checkout-overlay">
-  <div class="xok-modal">
-    <div class="xok-modal-kicker">For yourself</div>
-    <h3></h3>
-    <div class="xok-modal-price" id="xok-modal-item-price"></div>
-
-    <div style="display:flex;flex-direction:column;gap:9px;margin-bottom:20px;">
-      <span style="font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink);opacity:.7;">Shipping to</span>
-      <div class="xok-contact-types">
-        <button type="button" class="xok-type-btn is-selected" data-ship-zone="local" data-ship-fee="9">United Kingdom — £9</button>
-        <button type="button" class="xok-type-btn" data-ship-zone="intl" data-ship-fee="20">Outside the UK — £20</button>
-      </div>
-    </div>
-
-    <div class="xok-modal-price" id="xok-modal-total-price"></div>
-
-    <div id="xok-paypal-buttons"></div>
-    <div class="xok-form-success xok-checkout-success" style="display:none;"></div>
-    <div class="xok-form-error xok-checkout-error" style="display:none;"></div>
-    <p class="xok-modal-note">Payments are processed securely by PayPal. You'll enter your delivery address as part of PayPal checkout.</p>
-    <button class="xok-modal-close" data-checkout-close aria-label="Close">✕</button>
-  </div>
-</div>
 
 <div class="xok-modal-overlay xok-sub-overlay">
   <div class="xok-sub-modal">
@@ -164,6 +146,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- Sandbox client ID for testing. Swap for the Live client ID once test
      purchases work end to end (developer.paypal.com > Apps & Credentials > Live). -->
 <script src="https://www.paypal.com/sdk/js?client-id=AWe0EDs0qTmsLvu0VRCEOjwI426kwY5r39wY15nPmCxaiZqFDawmj0bSxD7gPV4zJ5Wu3gBEgH1vRWiq&currency=GBP" defer></script>
+<script src="assets/js/cart.js" defer></script>
 <script src="assets/js/products.js" defer></script>
 </body>
 </html>

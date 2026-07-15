@@ -84,6 +84,12 @@ body.no-hero .xok-nav-link.is-current{
   color:var(--accent) !important;
 }
 .xok-nav-toggle{display:none;}
+.xok-cart-btn{position:relative;cursor:pointer;}
+.xok-cart-count{
+  display:none;align-items:center;justify-content:center;position:absolute;top:-9px;right:-14px;
+  min-width:16px;height:16px;padding:0 4px;border-radius:9px;background:var(--accent);color:var(--paper);
+  font-family:var(--mono);font-size:10px;line-height:1;
+}
 
 /* pages without a hero: nav always solid */
 body.no-hero .xok-nav{
@@ -210,6 +216,11 @@ body.no-hero .xok-nav{
   border:none;background:rgba(250,250,248,.92);cursor:pointer;color:var(--ink);
   display:flex;align-items:center;justify-content:center;font-size:15px;
 }
+.xok-card-add{
+  position:absolute;bottom:12px;right:56px;width:36px;height:36px;border-radius:50%;
+  border:none;background:rgba(250,250,248,.92);cursor:pointer;color:var(--ink);
+  display:flex;align-items:center;justify-content:center;font-size:19px;line-height:1;
+}
 .xok-card-row{
   display:flex;justify-content:space-between;gap:12px;align-items:baseline;
 }
@@ -301,6 +312,9 @@ body.no-hero .xok-nav{
 
 .xok-cta-group{display:flex;flex-direction:column;gap:12px;max-width:420px;}
 .xok-cta-group .btn{padding:18px 24px;font-size:17px;width:100%;}
+.xok-add-qty{align-self:flex-start;gap:16px;}
+.xok-add-qty button{width:32px;height:32px;line-height:30px;font-size:16px;}
+.xok-add-qty span{font-size:15px;min-width:20px;}
 
 .xok-materials{margin-top:40px;border-top:1px solid var(--line);padding-top:28px;}
 .xok-materials-label{
@@ -416,6 +430,41 @@ body.no-hero .xok-nav{
 .xok-modal-close{
   position:absolute;top:16px;right:16px;all:unset;cursor:pointer;font-size:20px;color:var(--ink);opacity:.5;
 }
+
+/* ---------------------------- Cart drawer ---------------------------- */
+.xok-cart-modal{max-width:480px;max-height:88vh;overflow-y:auto;}
+.xok-cart-lines{display:flex;flex-direction:column;gap:16px;margin-bottom:24px;}
+.xok-cart-line{display:flex;gap:14px;align-items:flex-start;padding-bottom:16px;border-bottom:1px solid var(--line-soft);}
+.xok-cart-line-img{width:56px;height:56px;flex-shrink:0;background:#ECE7DE;overflow:hidden;}
+.xok-cart-line-img img{width:100%;height:100%;object-fit:cover;display:block;}
+.xok-cart-line-info{flex:1;min-width:0;}
+.xok-cart-line-title{font-family:var(--serif);font-size:16px;color:var(--ink);}
+.xok-cart-line-variant{font-family:var(--mono);font-size:11px;color:var(--ink);opacity:.6;margin-top:2px;}
+.xok-cart-line-price{font-family:var(--serif);font-size:14px;color:var(--accent);margin-top:4px;}
+.xok-cart-line-qty{display:flex;align-items:center;gap:10px;margin-top:8px;}
+.xok-cart-line-qty button{
+  all:unset;cursor:pointer;width:22px;height:22px;text-align:center;line-height:20px;
+  border:1px solid var(--line-soft);color:var(--ink);font-size:14px;
+}
+.xok-cart-line-qty button[disabled]{opacity:.35;cursor:not-allowed;}
+.xok-cart-line-qty span{font-family:var(--mono);font-size:12px;min-width:14px;text-align:center;}
+.xok-cart-line-remove{all:unset;cursor:pointer;color:var(--ink);opacity:.4;font-size:14px;flex-shrink:0;}
+.xok-cart-empty{font-family:var(--serif);font-size:15px;color:var(--ink);opacity:.6;margin-bottom:24px;}
+.xok-cart-ship{margin-bottom:22px;}
+.xok-cart-ship-label{
+  font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink);opacity:.7;
+  margin-bottom:9px;
+}
+.xok-cart-zones{margin-bottom:10px;}
+.xok-cart-upgrade{
+  display:flex;align-items:flex-start;gap:8px;font-family:var(--mono);font-size:11px;color:var(--ink);opacity:.75;
+  line-height:1.5;cursor:pointer;
+}
+.xok-cart-upgrade input{margin-top:2px;}
+.xok-cart-totals{border-top:1px solid var(--line-soft);padding-top:14px;margin-bottom:20px;}
+.xok-cart-totals-row{display:flex;justify-content:space-between;font-family:var(--serif);font-size:14px;color:var(--ink);opacity:.8;margin-bottom:6px;}
+.xok-cart-totals-grand{font-size:18px;color:var(--accent);opacity:1;font-weight:600;margin-bottom:0;}
+.xok-cart-note{margin-top:14px;}
 
 .xok-sub-modal{
   background:var(--paper);max-width:460px;width:100%;position:relative;animation:xfade .3s both;overflow:hidden;
