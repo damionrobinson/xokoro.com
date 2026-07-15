@@ -73,13 +73,21 @@ collections:
                 default: 50
                 hint: "Weight of the piece as it will be posted, including the gift box. Used to work out the shipping fee — rings/earrings/pendants are usually well under 100g."
 
-              - label: "Stock (how many exist)"
+              - label: "Print run size (total made)"
+                name: "runSize"
+                widget: "number"
+                value_type: "int"
+                min: 1
+                default: 1
+                hint: "How many of this exact piece were made in total, e.g. 3 for a small batch of 3, 1 for a one-off. Shown on the product page as '2 of 3 left'."
+
+              - label: "Stock (how many remain right now)"
                 name: "stock"
                 widget: "number"
                 value_type: "int"
                 min: 0
                 default: 1
-                hint: "How many of this exact piece you have to sell. Use 1 for a genuine one-off. The cart won't let anyone order more than this."
+                hint: "How many are still available to sell. Update this yourself as pieces sell — nothing decreases it automatically. The cart won't let anyone order more than this, and when it reaches 0 the page switches to 'Sold out' with a Notify Me option."
 
               - label: "Description"
                 name: "description"
